@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Login</title>
-
 <body>
     <div class="container">
     <nav id="menu">
@@ -22,18 +21,17 @@
     <a href='pesquisa.php'>Pesquisa</a>
     <h3>Cadastro de usuário</h3>
     <form method='POST' action='inserir.php'>
-    <label>Nome: </label>
-    <input name='nome'><br>
-    <label>Senha: </label>
-    <input name='senha'><br>
     <label>CPF: </label>
-    <input name='cpf'><br>
-    <label>Telefone: </label>
-    <input name='telefone'><br> 
+    <input name='cpf_usuario'><br>
+    <label>Nome: </label>
+    <input name='nome_usuario'><br>
+    <label>Telefone </label>
+    <input name='telefone_usuario'><br>
     <label>E-mail: </label>
-    <input name='email'><br>
+    <input name='email_usuario'><br>
+    <label>Senha: </label>
+    <input name='senha_usuario'><br> 
     <button type='submit'>Salvar</button>
 </form>
-
 </body>
 </html>

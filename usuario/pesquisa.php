@@ -17,19 +17,20 @@
 		<h2>Listagem de usuários</h2>
 		<table border>
 			<tr>
-				<th>Nome</th>
-				<th>Email</th>
-				<th>Telefone</th>
 				<th>CPF</th>
+				<th>Nome</th>
+				<th>Telefone</th>
+				<th>Email</th>
+				<th>Senha</th>
 			</tr>
 		<?php
-			$nome = '';
-			if (isset($_POST['nome'])){
-				$nome = $_POST['nome'];
+			$nome_usuario = '';
+			if (isset($_POST['nome_usuario'])){
+				$nome_usuario = $_POST['nome_usuario'];
 			}
 		
 			/* Conectando com o banco de dados para listar registros */
-			$datasource = 'mysql:host=localhost;dbname=controlegasto';
+			$datasource = 'mysql:host=localhost;dbname=controlegastos';
 			$user = 'root';
 			$pass = 'vertrigo';
 			$db = new PDO($datasource, $user, $pass);
@@ -40,18 +41,20 @@
 			if ($stm -> execute()) {
 				$result = $stm->fetchAll(PDO::FETCH_ASSOC);
 				foreach($result as $row) {
-					$cpf_usuario= $row['CPF'];
-					$nome_usuario = $row['nome'];
-					$email_usuario = $row['email'];
-					$telefone_usuario= $row['telefone'];
+					$cpf_usuario= $row['cpf_usuario'];
+					$nome_usuario = $row['nome_usuario'];
+					$telefone_usuario= $row['telefone_usuario'];
+					$email_usuario = $row['email_usuario'];
+					$senha_usuario = $row['senha_usuario'];
 	
 					print "<tr>
-					<td>$nome</td>
-                    <td>$cpf</td>
-					<td>$email</td>
-					<td>$telefone</td>
-					<td><a href='delete.php?id=$id_usuario'>Excluir</a> | 	
-					<a href='edita.php?id=$id_usuario'>Editar</a></td>
+					<td>$cpf_usuario</td>
+                    <td>$nome_usuario</td>
+					<td>$telefone_usuario</td>
+					<td>$email_usuario</td>
+					<td>$senha_usuario</td>
+					<td><a href='delete.php?id=$cpf_usuario'>Excluir</a> | 	
+					<a href='edita.php?id=$cpf_usuario'>Editar</a></td>
 					</tr>";					
 				}				
 			} else {
