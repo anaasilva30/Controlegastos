@@ -9,9 +9,7 @@
    
 
     # Conecta com BD
-    $ds = "mysql:host=localhost;dbname=controlegasto";
-    $con = new PDO($ds, 'root', 'vertrigo');
-
+   include_once "../db/db.php";
     # Insere no BD
     $sql = "INSERT INTO cpf_usuario (nome_usuario, cpf_usuario, senha_usuario, telefone_usuario, email_usuario) VALUES(?,?,?,?,?)";
     $stm = $con->prepare($sql);
