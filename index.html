@@ -19,35 +19,9 @@
         </ul>
     </nav>
     </div>
-    <a href='index.php'>Inicio</a> 
+    <h1>Para fazer seu cadastro</h1>
+    <li>Clique aqui: <a href="usuario">Usuário</a></li>
+    <h1>Já tem um cadastro?</h1>
+    <p>Ixi kkk</p>
 |
 
-<?php
-    # Conecta com BD
-    $ds = "mysql:host=localhost;dbname=controlegastos";
-    $con = new PDO($ds, 'root', 'vertrigo');
-
-    # Seleciona todos os registros
-    $sql = "SELECT * FROM cpf_usario";
-    $stm = $con->prepare($sql);
-    $stm->execute();
-
-    # Percorre os registros
-    foreach($stm as $row){
-        $cpf = $row['cpf_usuario'];
-        echo "<tr>";
-        echo "<td>" . $cpf . "</td>";
-        echo "<td>" . $row['nome_usuario'] . "</td>";
-        echo "<td>" . $row['telefone_usuario'] . "</td>";
-        echo "<td>" . $row['email_usuario'] . "</td>";
-        echo "<td>" . $row['endereco_usuario'] . "</td>";
-        echo "<td>
-                <a href='delete.php?cpf=$cpf'>Deletar</a>
-                |
-                <a href='edita.php?cpf=$cpf'>Editar</a>
-             </td>"; 
-        echo "</tr>";
-    }
-?>
-</body>
-</html>

@@ -1,5 +1,6 @@
+
 <?php
-    # Recebe dados do FORM
+# Recebe dados do FORM
     $cpf_usuario = $_POST['cpf_usuario'];
     $nome_usuario = $_POST['nome_usuario'];
     $telefone_usuario = $_POST['telefone_usuario'];
