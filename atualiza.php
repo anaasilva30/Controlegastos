@@ -11,12 +11,13 @@
      $con = new PDO($ds, 'root', 'vertrigo');
 
      #SQL para update 
-     $sql = "UPDATE cadastro SET nome=?, email=?, telefone=? WHERE cadastroid=?";
+     $sql = "UPDATE cadastro SET nome=?, email=?, telefone=?, senha=?, WHERE cadastroid=?";
      $stm = $con->prepare($sql);
      $stm->bindParam(1, $nome);
-     $stm->bindParam(2, $email);
-     $stm->bindParam(3, $telefone);
-     $stm->bindParam(4, $cpf);
+     $stm->bindParam(2, $senha);
+     $stm->bindParam(3, $email);
+     $stm->bindParam(4, $telefone);
+     $stm->bindParam(5, $cpf);
 
      #Executa SQL
      if ($stm->execute()){
