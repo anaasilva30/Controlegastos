@@ -1,15 +1,15 @@
 <?php
 
     # Recebe o ID
-    $cpf_usuario = $_GET['cpf_usuario'];
+    $id_entrada = $_GET['id_entrada'];
 
     # Conecta com BD
     include_once "../db/db.php";
 
     # SQL remoção
-    $sql = "DELETE FROM cadastro_usuario WHERE cpf_usuario=?";
+    $sql = "DELETE FROM entrada_usuario WHERE id_entrada=?";
     $stm = $con->prepare($sql);
-    $stm->execute(array($cpf_usuario));
+    $stm->execute(array($id_entrada));
 
     if($stm){
         header("location:index.php");
@@ -17,4 +17,5 @@
     else {
         print "<p>Erro ao remover</p>";
     }
+
 ?>

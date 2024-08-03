@@ -13,7 +13,7 @@
         </div>
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="#">Usuário</a></li>
             <li><a href="sobre.html">Sobre</a></li>
         </ul>
     </nav>

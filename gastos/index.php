@@ -21,16 +21,18 @@
     <a href='pesquisa.php'>Pesquisa</a>
     <h3>Cadastro de usuário</h3>
     <form method='POST' action='inserir.php'>
+    <label>Id: </label>
+    <input name='id_gasto'><br>
+    <label>Valor do gasto: </label>
+    <input name='valor_gasto '><br>
+    <label>Data do gasto: </label>
+    <input name='data_gasto'><br>
+    <label>Descrição do gasto: </label>
+    <input name='descricao_gasto'><br>
+    <label>Tipo do gasto: </label>
+    <input name='tipo_gasto'><br> 
     <label>CPF: </label>
-    <input name='cpf_usuario'><br>
-    <label>Nome: </label>
-    <input name='nome_usuario'><br>
-    <label>Telefone </label>
-    <input name='telefone_usuario'><br>
-    <label>E-mail: </label>
-    <input name='email_usuario'><br>
-    <label>Senha: </label>
-    <input name='senha_usuario'><br> 
+    <input name='cpf_usuario'><br> 
     <button type='submit'>Salvar</button>
 </form>
 </body>
