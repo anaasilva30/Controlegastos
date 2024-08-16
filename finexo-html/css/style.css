@@ -127,7 +127,7 @@ a:focus {
 
 .sub_page .hero_area {
   min-height: auto;
-  background: linear-gradient(130deg, #231a6f, #0f054c);
+  background: linear-gradient(130deg,white, white);
 }
 
 .sub_page .hero_area .hero_bg_box {
@@ -273,7 +273,7 @@ a:focus {
 }
 
 .slider_section .detail-box {
-  color: #00204a;
+  color: white;
 }
 
 .slider_section .detail-box h1 {
@@ -449,7 +449,7 @@ a:focus {
 }
 
 .service_section .box .detail-box a {
-  color: #00204a;
+  color: white;
   font-weight: 600;
 }
 
@@ -482,9 +482,10 @@ a:focus {
   background-color: #007fa4;
 }
 
+/*Fundo principal!*/
 .about_section {
-  background-color: #00204a;
-  color: #ffffff;
+  background-color: white;
+  color: black;
 }
 
 .about_section .heading_container {
@@ -623,7 +624,7 @@ a:focus {
   -webkit-transition: all .1s;
   transition: all .1s;
   margin-top: 45px;
-  background: -webkit-gradient(linear, left top, left bottom, from(#002759), to(#002b64));
+  background: -webkit-gradient(linear, left top, left bottom, from(white), to(#002b64));
   background: linear-gradient(to bottom, #002759, #002b64);
 }
 
@@ -741,7 +742,7 @@ a:focus {
 }
 
 .client_section .box .detail-box i {
-  color: #00204a;
+  color: white;
   margin-bottom: 10px;
 }
 
