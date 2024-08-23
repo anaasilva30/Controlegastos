@@ -6,25 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="shortcut icon" href="images/favicon.png" type="">
 
-  <title> Controle de Gastos</title>
+  <title> Controle de Gastos </title>
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
   <!-- fonts style -->
-  <link href="../https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="../https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
   <!-- font awesome style -->
-  <link href="../css/font-awesome.min.css" rel="stylesheet" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
-  <link href="../css/style.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
 
   <!-- responsive style -->
-  <link href="../css/responsive.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
 
 </head>
 
@@ -44,7 +44,7 @@
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
             <span>
-              Controle de Gastos
+              ClearCash
             </span>
           </a>
 
@@ -58,13 +58,10 @@
                 <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html"> Sobre</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="team.html">Time</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="indexg.html"> <i class="fa fa-user" aria-hidden="true"></i>Login</a>
+                <a class="nav-link" href="indexg.html"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
               </li>
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
@@ -82,10 +79,10 @@
     <div class="container  ">
       <div class="heading_container heading_center">
         <h2>
-          Sobre <span>Us</span>
+          Preencha seus dados e venha ser <span>ClearCash</span>
         </h2>
         <p>
-          Magni quod blanditiis non minus sed aut voluptatum illum quisquam aspernatur ullam vel beatae rerum ipsum voluptatibus
+          Centralize sua gestão de benefícios, pessoas e despesas corporativas em um só lugar.
         </p>
       </div>
       <div class="row">
@@ -97,17 +94,21 @@
         <div class="col-md-6">
           <div class="detail-box">
             <h3>
-              Apesentamos "Controle de Gastos"
+              Cadastro do usuário
             </h3>
-            <p>
-              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-              in some form, by injected humour, or randomised words which don't look even slightly believable. If you
-              are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
-              the middle of text. All
-            </p>
-            <p>
-              Molestiae odio earum non qui cumque provident voluptates, repellendus exercitationem, possimus at iste corrupti officiis unde alias eius ducimus reiciendis soluta eveniet. Nobis ullam ab omnis quasi expedita.
-            </p>
+            <form method='POST' action='inserir.php'>
+            <label>CPF: </label>
+            <input name='cpf_usuario'><br>
+            <label>Nome: </label>
+            <input name='nome_usuario'><br>
+            <label>Telefone </label>
+            <input name='telefone_usuario'><br>
+            <label>E-mail: </label>
+            <input name='email_usuario'><br>
+            <label>Senha: </label>
+            <input name='senha_usuario'><br> 
+            <button type='submit'>Salvar</button>
+        </form>
             <a href="">
               Read More
             </a>
@@ -125,25 +126,13 @@
         <div class="col-md-6 col-lg-3 info_col">
           <div class="info_contact">
             <h4>
-              Address
+              Contato
             </h4>
             <div class="contact_link_box">
               <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Location
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  Call +01 1234567890
-                </span>
-              </a>
-              <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  demo@gmail.com
+                  clearcashoficial@gmail.com
                 </span>
               </a>
             </div>
@@ -151,12 +140,6 @@
           <div class="info_social">
             <a href="">
               <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-linkedin" aria-hidden="true"></i>
             </a>
             <a href="">
               <i class="fa fa-instagram" aria-hidden="true"></i>
@@ -169,7 +152,7 @@
               Info
             </h4>
             <p>
-              necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
+              Aqui você organiza sua vida financeira de maneira fácil e prática!
             </p>
           </div>
         </div>
@@ -182,15 +165,6 @@
               <a class="active" href="index.html">
                 Home
               </a>
-              <a class="" href="about.html">
-                About
-              </a>
-              <a class="" href="service.html">
-                Services
-              </a>
-              <a class="" href="why.html">
-                Why Us
-              </a>
               <a class="" href="team.html">
                 Team
               </a>
@@ -199,12 +173,12 @@
         </div>
         <div class="col-md-6 col-lg-3 info_col ">
           <h4>
-            Subscribe
+            Envie seu feedback
           </h4>
           <form action="#">
             <input type="text" placeholder="Enter email" />
             <button type="submit">
-              Subscribe
+              Enviar
             </button>
           </form>
         </div>
@@ -219,7 +193,7 @@
     <div class="container">
       <p>
         &copy; <span id="displayYear"></span> All Rights Reserved By
-        <a href="https://html.design/">Free Html Templates</a>
+        <a href="https://html.design/">Equipe ClearCash</a>
       </p>
     </div>
   </section>
