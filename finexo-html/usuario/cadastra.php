@@ -94,9 +94,9 @@
         <div class="col-md-6">
           <div class="detail-box">
             <h3>
-              Login do usuário
+              Cadastro do usuário
             </h3>
-            <form method="post" action="confirmalogin.php"></form>
+            <form method="post" action="salva.php">
             <label>CPF: </label>
             <input name='cpf_usuario'><br>
             <label>Nome: </label>
@@ -107,8 +107,7 @@
             <input name='email_usuario'><br>
             <label>Senha: </label>
             <input type="password" name="senha_usuario" /><br>
-            <button type='submit'>Logar</button><br>
-            <a href='cadastra.php'>Não tem login? Cadastre-se.</a>
+            <button type='submit'>Logar</button>
         </form>
           </div>
         </div>
@@ -216,3 +215,12 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
