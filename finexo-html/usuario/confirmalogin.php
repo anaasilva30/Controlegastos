@@ -4,9 +4,6 @@ session_start();
 
 // Pegando os dados de login enviados.
 $cpf_usuario = $_POST['cpf_usuario'];
-$nome_usario = $_POST['nome_usuario'];
-$telefone_usario = $_POST['telefone_usuario'];
-$email_usario = $_POST['email_usuario'];
 $senha_usario = $_POST['senha_usuario'];
 
 /* Conectando com o banco de dados para cadastrar registros */
@@ -15,9 +12,9 @@ $user = 'root';
 $pass = 'vertrigo';
 $db = new PDO($datasource, $user, $pass);
 	
-$query = "SELECT * FROM cadastro_usuario WHERE login=? AND pass=?";
+$query = "SELECT * FROM cadastro_usuario WHERE cpf_usuario=? AND senha_usuario=?";
 $stm = $db->prepare($query);
-$stm->bindParam(1, $cadastro_usuario);
+$stm->bindParam(1, $cpf_usuario);
 $stm->bindParam(2, $senha_usuario);
 $stm->execute();
 
@@ -25,10 +22,10 @@ if ($stm -> fetch()) {
 	// Login efetuado com sucesso.
 
 	// Armazenando usuário na sessão.
-	$_SESSION['user'] = $usuario;
+	$_SESSION['cpf_usuario'] = $cadastro_usuario;
 	
 	// Redirecionando para a página inicial.
-	header("location:indexg.html");
+	header("location:index.html");
 } else {
 	// Caso usuário ou senha estejam incorretos.
 	print "<p>Usuário e/ou Senha Inválidos!</p>";
