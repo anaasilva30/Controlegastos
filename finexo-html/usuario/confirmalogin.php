@@ -1,10 +1,12 @@
 <?php
-// Inicia a sess�o.
+// Inicia a sessão.
 session_start();
 
 // Pegando os dados de login enviados.
 $cpf_usuario = $_POST['cpf_usuario'];
-$senha_usario = $_POST['senha_usuario'];
+$senha_usuario = $_POST['senha_usuario'];
+
+print "--$cpf_usuario | senha: $senha_usuario";
 
 /* Conectando com o banco de dados para cadastrar registros */
 $datasource = 'mysql:host=localhost;dbname=controlegastos';
@@ -18,14 +20,15 @@ $stm->bindParam(1, $cpf_usuario);
 $stm->bindParam(2, $senha_usuario);
 $stm->execute();
 
-if ($stm -> fetch()) {
+if ($row = $stm -> fetch()) {
 	// Login efetuado com sucesso.
 
 	// Armazenando usuário na sessão.
-	$_SESSION['cpf_usuario'] = $cadastro_usuario;
+	$_SESSION['cpf_usuario'] = $cpf_usuario;
+	$_SESSION['nome_usuario'] = $row['nome_usuario'];
 	
 	// Redirecionando para a página inicial.
-	header("location:index.html");
+	header("location:indexg.php");
 } else {
 	// Caso usuário ou senha estejam incorretos.
 	print "<p>Usuário e/ou Senha Inválidos!</p>";

@@ -1,3 +1,7 @@
+<?php
+// Inicia a sessao.
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,7 +65,17 @@
                 <a class="nav-link" href="../team.html">Time</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i>Login</a>
+              <?php
+                if (isset($_SESSION['nome_usuario'])) {
+                  $nome_usuario = $_SESSION['nome_usuario'];
+                  print "<p>Olá $nome_usuario! <a class='nav-link' href='logout.php'><i class='fa fa-user'></i>Sair</a></a>";
+
+                } else {
+                  ?>
+                    <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i>Login</a>
+                  <?php                 
+                }
+              ?>
               </li>
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
@@ -96,11 +110,11 @@
             <h3>
               Login do usuário
             </h3>
-            <form method="post" action="confirmalogin.php"></form>
+            <form method="post" action="confirmalogin.php">
             <label>CPF: </label>
             <input name='cpf_usuario'><br>
             <label>Senha: </label>
-            <input type='password' name='senha' /><br>
+            <input type='password' name='senha_usuario' /><br>
             <button type='submit'>Logar</button><br>
             <a href='cadastra.html'>Não tem login? Cadastre-se.</a>
         </form>

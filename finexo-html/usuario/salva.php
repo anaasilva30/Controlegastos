@@ -12,10 +12,13 @@
 	$pass = 'vertrigo';
 	$db = new PDO($datasource, $user, $pass);
 	
-	$query = "INSERT INTO cadastro_usuario (login,pass) VALUES(?,?)";			
+	$query = "INSERT INTO cadastro_usuario (cpf_usuario, nome_usuario, telefone_usuario, email_usuario, senha_usuario) VALUES(?,?,?,?,?)";			
 	$stm = $db->prepare($query);
-	$stm->bindParam(1, $cadastro_usuario);
-	$stm->bindParam(2, $senha_usuario);
+	$stm->bindParam(1, $cpf_usuario);
+	$stm->bindParam(2, $nome_usario);
+	$stm->bindParam(3, $telefone_usario);
+	$stm->bindParam(4, $email_usario);
+	$stm->bindParam(5, $senha_usario);
 		
 	if($stm->execute()) {
 		print "<p>Cadastro efetuado com sucesso</p>";
