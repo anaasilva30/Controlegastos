@@ -662,7 +662,7 @@ a:focus {
 }
 
 .team_section .team_container .box .social_box {
-  padding: 10px 45px 20px 45px;
+  padding: 50px 65px 30px 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -674,6 +674,7 @@ a:focus {
 .team_section .team_container .box .social_box a {
   color: #ffffff;
   font-size: 22px;
+  padding-left: 165px;
 }
 
 .team_section .team_container .box .social_box a:hover {

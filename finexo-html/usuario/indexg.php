@@ -62,7 +62,7 @@ session_start();
                 <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../team.html">Time</a>
+                <a class="nav-link" href="../team.html">Equipe</a>
               </li>
               <li class="nav-item">
               <?php
@@ -172,7 +172,7 @@ session_start();
                 Home
               </a>
               <a class="" href="team.html">
-                Team
+                Equipe
               </a>
             </div>
           </div>
@@ -198,7 +198,7 @@ session_start();
   <section class="footer_section">
     <div class="container">
       <p>
-        &copy; <span id="displayYear">2024</span> 
+        &copy; <span id="displayYear"></span> 
         <a>Equipe ClearCash</a>
       </p>
     </div>
