@@ -939,4 +939,9 @@ a:focus {
 .label_usuario{
   display: inline-block;
   width: 80px;
+  
+}
+.login-user{
+  color: deeppink !important;
+  font-weight: bold;
 }
