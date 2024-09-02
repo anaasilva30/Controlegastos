@@ -1,3 +1,8 @@
+<?php
+// Inicia a sessao.
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -61,11 +66,24 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
               <li class="nav-item ">
-                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.php">Home</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="team.html">Equipe<span class="sr-only">(current)</span> </a>
+                <a class="nav-link" href="#">Equipe<span class="sr-only">(current)</span> </a>
               </li>
+              <?php
+                if (isset($_SESSION['nome_usuario'])) {
+                  $nome_usuario = $_SESSION['nome_usuario'];
+                 
+                  print "<li class='nav-item'><a class='nav-link login-user' href='perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
+                  print "<li class='nav-item'><a class='nav-link' href='logout.php'><i class='fa fa-sign-out'></i>Sair</a></li>";
+                 
+                } else {
+                  ?>
+                    <li class="nav-item"><a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i>Login</a></li>
+                  <?php                 
+                }
+                ?>
               <li class="nav-item">
                 <a class="nav-link" href="usuario/indexg.php"> <i class="fa fa-user" aria-hidden="true"></i>Login</a>
               </li>

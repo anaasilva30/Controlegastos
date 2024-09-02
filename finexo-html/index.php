@@ -1,3 +1,9 @@
+
+<?php
+// Inicia a sessao.
+session_start();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +48,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="index.php">
             <span>
               ClearCash
             </span>
@@ -55,13 +61,25 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
               <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="team.html">Equipe</a>
-              </li>       
+                <a class="nav-link" href="team.php">Equipe</a>
+              </li> 
+   
+
+              <?php
+                if (isset($_SESSION['nome_usuario'])) {
+                  $nome_usuario = $_SESSION['nome_usuario'];
+                 
+                  print "<li class='nav-item'><a class='nav-link login-user' href='perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
+                  print "<li class='nav-item'><a class='nav-link' href='logout.php'><i class='fa fa-sign-out'></i>Sair</a></li>";
+                 
+                } 
+              ?> 
+
               <li class="nav-item">
-                <a class="nav-link" href="usuario/indexg.php"> <i class="fa fa-user" aria-hidden="true"></i>Login</a>
+                <a class="nav-link" href="usuario/index.php"> <i class="fa fa-user" aria-hidden="true"></i>Login</a>
               </li>
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">

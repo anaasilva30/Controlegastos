@@ -28,7 +28,7 @@ if ($row = $stm -> fetch()) {
 	$_SESSION['nome_usuario'] = $row['nome_usuario'];
 	
 	// Redirecionando para a página inicial.
-	header("location:indexg.php");
+	header("location:../index.php");
 } else {
 	// Caso usuário ou senha estejam incorretos.
 	print "<p>Usuário e/ou Senha Inválidos!</p>";
