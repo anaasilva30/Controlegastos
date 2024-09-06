@@ -55,14 +55,29 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
               <li class="nav-item active">
-                <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../index.php">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../team.html">Equipe</a>
+                <a class="nav-link" href="../team.php">Equipe</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i>Login</a>
+                <a class="nav-link" href="usuario/indexg.php"> <i class="fa fa-user" aria-hidden="true"></i>Login</a>
               </li>
+
+    <?php
+                if (isset($_SESSION['nome_usuario'])) {
+                  $nome_usuario = $_SESSION['nome_usuario'];
+                 
+                  print "<li class='nav-item'><a class='nav-link login-user' href='#'><i class='fa fa-dollar'></i>Gastos</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
+                  print "<li class='nav-item'><a class='nav-link' href='logout.php'><i class='fa fa-sign-out'></i>Sair</a></li>";
+                 
+                } else {
+                  ?>
+                    <li class="nav-item"><a class="nav-link" href="usuario/indexg.php"> <i class="fa fa-user" aria-hidden="true"></i>Login</a></li>
+                  <?php                 
+                }
+              ?> 
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
@@ -93,7 +108,7 @@
         </div>
         <div class="col-md-6">
           <div class="detail-box">
-    <a href='pesquisa.php'>Pesquisa</a>
+    <a href='pesquisa.php'>Pesquisa</a><br><br>
     <h3>Cadastro de Gastos</h3>
     <form method='POST' action='inserir.php'>   
     <label class="label_usuario">Valor: </label>
@@ -105,6 +120,12 @@
     <label class="label_usuario">Tipo: </label>
     <select name='tipo_gasto'>
         <option value="1">Pix</option>
+        <option value="2">Dinheiro</option>
+        <option value="3">Débito</option>
+        <option value="4">Crédito</option>
+        <option value="5">Boleto</option>
+        <option value="6">Transferência</option>
+        <option value="7">Cheque</option>
     </select>
     <br> 
     
@@ -160,10 +181,10 @@
               Links
             </h4>
             <div class="info_links">
-              <a class="active" href="index.html">
+              <a class="active" href="index.php">
                 Home
               </a>
-              <a class="" href="team.html">
+              <a class="" href="team.php">
                 Equipe
               </a>
             </div>
@@ -190,7 +211,7 @@
   <section class="footer_section">
     <div class="container">
       <p>
-        &copy; <span id="displayYear"></span>
+        &copy; <span id="displayYear">2024</span>
         <a>Equipe ClearCash</a>
       </p>
     </div>
