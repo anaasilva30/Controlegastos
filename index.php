@@ -1,30 +1,36 @@
+
+<?php
+// Inicia a sessao.
+session_start();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="shortcut icon" href="../images/favicon.png" type="">
+  <link rel="shortcut icon" href="images/favicon.png" type="">
 
   <title> Controle de Gastos </title>
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
   <!-- fonts style -->
-  <link href="../https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="../https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
   <!-- font awesome style -->
-  <link href="../css/font-awesome.min.css" rel="stylesheet" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
-  <link href="../css/style.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
 
   <!-- responsive style -->
-  <link href="../css/responsive.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
 
 </head>
 
@@ -34,7 +40,7 @@
 
     <div class="hero_bg_box">
       <div class="bg_img_box">
-        <img src="../images/hero-bg.png" alt="">
+        <img src="images/hero-bg.png" alt="">
       </div>
     </div>
 
@@ -42,7 +48,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="index.php">
             <span>
               ClearCash
             </span>
@@ -55,14 +61,27 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
               <li class="nav-item active">
-                <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../team.html">Equipe</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i>Login</a>
-              </li>
+                <a class="nav-link" href="team.php">Equipe</a>
+              </li> 
+   
+
+              <?php
+                if (isset($_SESSION['nome_usuario'])) {
+                  $nome_usuario = $_SESSION['nome_usuario'];
+                 
+                  print "<li class='nav-item'><a class='nav-link login-user' href='gastos'><i class='fa fa-dollar'></i>Gastos</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
+                  print "<li class='nav-item'><a class='nav-link' href='logout.php'><i class='fa fa-sign-out'></i>Sair</a></li>";
+                 
+                } else {
+                  ?>
+                    <li class="nav-item"><a class="nav-link" href="usuario/indexg.php"> <i class="fa fa-user" aria-hidden="true"></i>Login</a></li>
+                  <?php                 
+                }
+              ?> 
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
@@ -79,38 +98,28 @@
     <div class="container  ">
       <div class="heading_container heading_center">
         <h2>
-          Preencha seus dados e venha fazer parte do <span>ClearCash</span>
+          Simplifique sua gestão <span>financeira</span>
         </h2>
-        <p>
-          Centralize suas despesas e recebimentos e facilite gestão financeira.
-        </p>
       </div>
       <div class="row">
         <div class="col-md-6 ">
           <div class="img-box">
-            <img src="../images/about-img.png" alt="">
+            <img src="images/about-img.png" alt="">
           </div>
         </div>
         <div class="col-md-6">
           <div class="detail-box">
-    <a href='pesquisa.php'>Pesquisa</a>
-    <h3>Cadastro de Gastos</h3>
-    <form method='POST' action='inserir.php'>   
-    <label class="label_usuario">Valor: </label>
-    <input name='valor_gasto'><br>
-    <label class="label_usuario">Data: </label>
-    <input name='data_gasto' type="date"><br>
-    <label class="label_usuario">Descrição: </label>
-    <input name='descricao_gasto'><br>
-    <label class="label_usuario">Tipo: </label>
-    <select name='tipo_gasto'>
-        <option value="1">Pix</option>
-    </select>
-    <br> 
-    
-    <button type='submit'>Salvar</button>
-</form>
-</div>
+            <h3>
+              Sobre nós 
+            </h3>
+            <p>
+              No ClearCash, entendemos que gerenciar suas finanças pode ser um desafio, mas estamos aqui para tornar isso mais simples e eficiente. Nosso objetivo é fornecer a você as ferramentas e a clareza necessárias para manter suas despesas sob controle e alcançar suas metas financeiras com confiança.
+            </p>
+            <p>
+              Inicie sua jornada rumo a uma gestão financeira mais estruturada e serena. Comece a administrar seus gastos com maior precisão e transparência. O caminho para o seu sucesso financeiro começa agora!
+            </p>
+            <a href='usuario/cadastra.html'>Cadastre-se.</a>
+          </div>
         </div>
       </div>
     </div>
@@ -216,12 +225,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-

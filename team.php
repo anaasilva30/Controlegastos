@@ -2,43 +2,50 @@
 // Inicia a sessao.
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html>
+
 <head>
+  <!-- Basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="shortcut icon" href="../images/favicon.png" type="">
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="images/favicon.png" type="">
 
-  <title> Controle de Gastos </title>
+  <title> ClearCash </title>
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
   <!-- fonts style -->
-  <link href="../https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="../https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
   <!-- font awesome style -->
-  <link href="../css/font-awesome.min.css" rel="stylesheet" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
-  <link href="../css/style.css" rel="stylesheet" />
-
+  <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="../css/responsive.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
 
 </head>
 
-<body>
+<body class="sub_page">
 
   <div class="hero_area">
 
     <div class="hero_bg_box">
       <div class="bg_img_box">
-        <img src="../images/hero-bg.png" alt="">
+        <img src="images/hero-bg.png" alt="">
       </div>
     </div>
 
@@ -58,12 +65,12 @@ session_start();
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
-              <li class="nav-item">
-                <a class="nav-link" href="../index.php">Home <span class="sr-only">(current)</span></a>
+              <li class="nav-item ">
+                <a class="nav-link" href="index.php">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../team.html">Equipe</a>
-              </li>             
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Equipe<span class="sr-only">(current)</span> </a>
+              </li>
               <?php
                 if (isset($_SESSION['nome_usuario'])) {
                   $nome_usuario = $_SESSION['nome_usuario'];
@@ -73,10 +80,10 @@ session_start();
                  
                 } else {
                   ?>
-                    <li class="nav-item"><a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i>Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="usuario/indexg.php"> <i class="fa fa-user" aria-hidden="true"></i>Login</a></li>
                   <?php                 
                 }
-              ?>              
+              ?> 
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
@@ -87,44 +94,89 @@ session_start();
         </nav>
       </div>
     </header>
-   
+    <!-- end header section -->
+  </div>
 
-  <section class="about_section layout_padding">
-    <div class="container  ">
+  <!-- team section -->
+  <section class="team_section layout_padding">
+    <div class="container-fluid">
       <div class="heading_container heading_center">
-        <h2>
-          Preencha seus dados e venha fazer parte do<span>ClearCash</span>
+        <h2 class="">
+          Nossa <span>Equipe</span>
         </h2>
-        <p>
-          Centralize suas despesas e recebimentos e facilite gestão financeira.
-        </p>
       </div>
-      <div class="row">
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="../images/about-img.png" alt="">
+
+      <div class="team_container">
+        <div class="row">
+          <div class="col-lg-4 col-sm-6">
+            <div class="box ">
+              <div class="img-box">
+                <img src="images/ana.jpeg" class="img1" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Ana Clara
+                </h5>
+                <p>
+                  Desenvolvedora de software
+                </p>
+              </div>
+              <div class="social_box">
+                <a href="https://www.instagram.com/anaasilva_30?igsh=MTg1eXVkYmx4Z3Fmag%3D%3D&utm_source=qr">
+                  <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+                
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="detail-box">
-            <h3>
-              Login do usuário
-            </h3>
-            <form method="post" action="confirmalogin.php">
-            <label>CPF: </label>
-            <input name='cpf_usuario'><br>
-            <label>Senha: </label>
-            <input type='password' name='senha_usuario' /><br>
-            <button type='submit'>Logar</button><br>
-            <a href='cadastra.html'>Não tem login? Cadastre-se.</a>
-        </form>
+          <div class="col-lg-4 col-sm-6">
+            <div class="box ">
+              <div class="img-box">
+                <img src="images/lauany.jpeg" class="img1" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Lauany Fidelis
+                </h5>
+                <p>
+                  Gerente fiscal/documental
+                </p>
+              </div>
+              <div class="social_box">
+                <a href="https://www.instagram.com/lauany_fidelis?igsh=cml4eTFjZW01cHM=">
+                  <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <div class="box ">
+              <div class="img-box">
+                <img src="images/lavinia.jpeg" class="img1" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Lavínia Andrade
+                </h5>
+                <p>
+                  Desenvolvedora de software
+                </p>
+              </div>
+              <div class="social_box">
+                <a href="https://www.instagram.com/lavnia_andrade?igsh=MWx5OTQ4Z3N5dnRpeQ==">
+                  <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+              </div>
+          </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+  <!-- end team section -->
 
-  <!-- end about section -->
+  <!-- info section -->
 
   <section class="info_section layout_padding2">
     <div class="container">
@@ -198,8 +250,8 @@ session_start();
   <section class="footer_section">
     <div class="container">
       <p>
-        &copy; <span id="displayYear"></span> 
-        <a>Equipe ClearCash</a>
+        &copy; <span id="displayYear"></span>
+        <a href="https://html.design/"> Equipe ClearCash</a>
       </p>
     </div>
   </section>
@@ -223,4 +275,5 @@ session_start();
   <!-- End Google Map -->
 
 </body>
+
 </html>
