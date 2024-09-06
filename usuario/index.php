@@ -10,7 +10,7 @@ include_once("verifica.php");
 	?>
 	<a href='logout.php'>Sair</a>
 	<h3>Exemplo de Aplica��o Utilizando Login</h3>
-	<p>Este texto s� pode ser visualizado por usu�rios 
-		que est�o logados na aplica��o.</p>	
+	<p>Este texto só pode ser visualizado por usuários 
+		que estão logados na aplicação.</p>	
 </body>	
 </html>
