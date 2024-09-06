@@ -1,3 +1,11 @@
+
+
+<?php
+// Inicia a sessao.
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,9 +68,20 @@
               <li class="nav-item">
                 <a class="nav-link" href="../team.html">Equipe</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i>Login</a>
-              </li>
+              <?php
+                if (isset($_SESSION['nome_usuario'])) {
+                  $nome_usuario = $_SESSION['nome_usuario'];
+                 
+                  print "<li class='nav-item'><a class='nav-link login-user' href='index.php'><i class='fa fa-dollar'></i>Gastos</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
+                  print "<li class='nav-item'><a class='nav-link' href='../usuario/logout.php'><i class='fa fa-sign-out'></i>Sair</a></li>";
+                 
+                } else {
+                  ?>
+                    <li class="nav-item"><a class="nav-link" href="usuario/indexg.php"> <i class="fa fa-user" aria-hidden="true"></i>Login</a></li>
+                  <?php                 
+                }
+              ?> 
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
@@ -73,8 +92,6 @@
         </nav>
       </div>
     </header>
-   
-
   <section class="about_section layout_padding">
     <div class="container  ">
       <div class="heading_container heading_center">
@@ -93,7 +110,6 @@
         </div>
         <div class="col-md-6">
           <div class="detail-box">
-    <a href='pesquisa.php'>Pesquisa</a>
     <h3>Cadastro de Gastos</h3>
     <form method='POST' action='inserir.php'>   
     <label class="label_usuario">Valor: </label>
@@ -105,6 +121,12 @@
     <label class="label_usuario">Tipo: </label>
     <select name='tipo_gasto'>
         <option value="1">Pix</option>
+        <option value="2">Crédito</option>
+        <option value="3">Débito</option>
+        <option value="4">Boleto</option>
+        <option value="5">Transferência</option>
+        <option value="6">Dinheiro</option>
+    >
     </select>
     <br> 
     
