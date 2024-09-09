@@ -12,7 +12,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="shortcut icon" href="images/favicon.png" type="">
 
-  <title> Controle de Gastos </title>
+  <title> SaldoPrático</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -50,7 +50,7 @@ session_start();
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.php">
             <span>
-              ClearCash
+            SaldoPrático
             </span>
           </a>
 
@@ -113,7 +113,7 @@ session_start();
               Sobre nós 
             </h3>
             <p>
-              No ClearCash, entendemos que gerenciar suas finanças pode ser um desafio, mas estamos aqui para tornar isso mais simples e eficiente. Nosso objetivo é fornecer a você as ferramentas e a clareza necessárias para manter suas despesas sob controle e alcançar suas metas financeiras com confiança.
+              No SaldoPrático, entendemos que gerenciar suas finanças pode ser um desafio, mas estamos aqui para tornar isso mais simples e eficiente. Nosso objetivo é fornecer a você as ferramentas e a clareza necessárias para manter suas despesas sob controle e alcançar suas metas financeiras com confiança.
             </p>
             <p>
               Inicie sua jornada rumo a uma gestão financeira mais estruturada e serena. Comece a administrar seus gastos com maior precisão e transparência. O caminho para o seu sucesso financeiro começa agora!
@@ -139,7 +139,7 @@ session_start();
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  clearcashoficial@gmail.com
+                  saldopraticooficial@gmail.com
                 </span>
               </a>
             </div>
@@ -200,7 +200,7 @@ session_start();
     <div class="container">
       <p>
         &copy; <span id="displayYear"></span>
-        <a>Equipe ClearCash</a>
+        <a>Equipe SaldoPrático</a>
       </p>
     </div>
   </section>

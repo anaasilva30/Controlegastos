@@ -18,7 +18,7 @@ session_start();
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="">
 
-  <title> ClearCash </title>
+  <title> SaldoPrático </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -55,7 +55,7 @@ session_start();
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
             <span>
-              ClearCash
+            SaldoPrático
             </span>
           </a>
 
@@ -192,7 +192,7 @@ session_start();
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  clearcashoficial@gmail.com
+                  saldopraticooficial@gmail.com
                 </span>
               </a>
             </div>
@@ -253,7 +253,7 @@ session_start();
     <div class="container">
       <p>
         &copy; <span id="displayYear"></span>
-        <a href="https://html.design/"> Equipe ClearCash</a>
+        <a href="https://html.design/"> Equipe SaldoPrático</a>
       </p>
     </div>
   </section>

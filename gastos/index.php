@@ -52,7 +52,7 @@ session_start();
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
             <span>
-              ClearCash
+            SaldoPrático
             </span>
           </a>
 
@@ -96,7 +96,7 @@ session_start();
     <div class="container  ">
       <div class="heading_container heading_center">
         <h2>
-          Preencha seus dados e venha fazer parte do <span>ClearCash</span>
+          Preencha seus dados e venha fazer parte do <span>SaldoPrático</span>
         </h2>
         <p>
           Centralize suas despesas e recebimentos e facilite gestão financeira.
@@ -110,7 +110,7 @@ session_start();
         </div>
         <div class="col-md-6">
           <div class="detail-box">
-    <a href='pesquisa.php'>Pesquisa</a>
+    
     <h3>Cadastro de Gastos</h3>
     <form method='POST' action='inserir.php'>   
     <label class="label_usuario">Valor: </label>
@@ -122,10 +122,42 @@ session_start();
     <label class="label_usuario">Tipo: </label>
     <select name='tipo_gasto'>
         <option value="1">Pix</option>
+        <option value="2">Dinheiro</option>
+        <option value="3">Débito</option>
+        <option value="4">Crédito</option>
+        <option value="5">Transferência</option>
+
     </select>
     <br> 
+    <br>
     
     <button type='submit'>Salvar</button>
+    <br><br><a href='pesquisa.php'>Pesquisa</a>
+</form>
+<br>
+<br>
+</div>
+    
+    <h3>Cadastro de Entrada</h3>
+    <form method='POST' action='inserir.php'>   
+    <label class="label_usuario">Valor: </label>
+    <input name='valor_gasto'><br>
+    <label class="label_usuario">Data: </label>
+    <input name='data_gasto' type="date"><br>
+    <label class="label_usuario">Descrição: </label>
+    <input name='descricao_gasto'><br>
+    <label class="label_usuario">Tipo: </label>
+    <select name='tipo_gasto'>
+        <option value="1">Pix</option>
+        <option value="2">Dinheiro</option>
+        <option value="3">Débito</option>
+        <option value="4">Crédito</option>
+        <option value="5">Transferência</option>
+    </select>
+    <br> 
+    <br>
+    <button type='submit'>Salvar</button>
+    <br><br><a href='pesquisa.php'>Pesquisa</a>
 </form>
 </div>
         </div>
@@ -147,7 +179,7 @@ session_start();
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  clearcashoficial@gmail.com
+                  saldopraticoficial@gmail.com
                 </span>
               </a>
             </div>
@@ -208,7 +240,7 @@ session_start();
     <div class="container">
       <p>
         &copy; <span id="displayYear">2024</span>
-        <a>Equipe ClearCash</a>
+        <a>Equipe SaldoPrático</a>
       </p>
     </div>
   </section>
