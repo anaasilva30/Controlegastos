@@ -41,17 +41,41 @@
 				$result = $stm->fetchAll(PDO::FETCH_ASSOC);
 				foreach($result as $row) {
 					$valor_gasto = $row['Valor'];
-					$data = $row['Data'];
-					$tipo = $row['Tipo'];
-					$descrição= $row['Descrição'];
+					$data_gasto = $row['Data'];
+					$tipo_gasto = $row['Tipo'];
+					$descrição_gasto = $row['Descrição'];
 	
 					print "<tr>
-					<td>$valor</td>
-					<td>$data</td>
-					<td>$tipo</td>
-                    <td>$descrição</td>
-					<td><a href='delete.php?id=$cpf_usuario'>Excluir</a> | 	
-					<a href='edita.php?id=$cpf_usuario'>Editar</a></td>
+					<td>$valor_gasto </td>
+					<td>$data_gasto </td>
+					<td>$tipo_gasto </td>
+                    <td>$descrição_gasto</td>
+					<td><a href='delete.php?id=$id_gasto'>Excluir</a> | 	
+					<a href='edita.php?id=$id_gasto'>Editar</a></td>
+					</tr>";					
+				}				
+			} else {
+				print '<p>Erro ao listar registros!</p>';
+			}
+
+			$query = "SELECT * FROM entrada_usuario WHERE data_entrada LIKE '%$data%'";
+			$stm = $db -> prepare($query);
+			
+			if ($stm -> execute()) {
+				$result = $stm->fetchAll(PDO::FETCH_ASSOC);
+				foreach($result as $row) {
+					$valor_entrada = $row['Valor'];
+					$data_entrada = $row['Data'];
+					$tipo_entrada = $row['Tipo'];
+					$descrição_entrada = $row['Descrição'];
+	
+					print "<tr>
+					<td>$valor_entrada</td>
+					<td>$data_entrada</td>
+					<td>$tipo_entrada</td>
+                    <td>$descrição_entrada</td>
+					<td><a href='delete.php?id=$id_entrada'>Excluir</a> | 	
+					<a href='edita.php?id=$id_entrada'>Editar</a></td>
 					</tr>";					
 				}				
 			} else {
