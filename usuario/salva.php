@@ -21,7 +21,8 @@
 	$stm->bindParam(5, $senha_usario);
 		
 	if($stm->execute()) {
-		print "<p>Cadastro efetuado com sucesso</p>";
+		print "<p>Cadastro efetuado com sucesso! Faça seu login!</p>";
+		print "<a href='indexg.php'>Login</a><br><br>";
 		print "<a href='index.php'>Voltar</a>";
 	}
 	else {
