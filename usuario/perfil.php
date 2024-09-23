@@ -67,7 +67,8 @@ session_start();
               <?php
                 if (isset($_SESSION['nome_usuario'])) {
                   $nome_usuario = $_SESSION['nome_usuario'];
-                 
+
+                  print "<li class='nav-item'><a class='nav-link login-user' href='../gastos/index.php'><i class='fa fa-dollar'></i>Gastos</a></li>";
                   print "<li class='nav-item'><a class='nav-link login-user' href='perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
                   print "<li class='nav-item'><a class='nav-link' href='../usuario/logout.php'><i class='fa fa-sign-out'></i>Sair</a></li>";
                  
@@ -93,10 +94,10 @@ session_start();
     <div class="container  ">
       <div class="heading_container heading_center">
         <h2>
-          Preencha seus dados e venha fazer parte do<span>ClearCash</span>
+          Perfil do <span>Usuário</span>
         </h2>
         <p>
-          Centralize suas despesas e recebimentos e facilite gestão financeira.
+         Estamos felizes de te ter conosco!
         </p>
       </div>
       <div class="row">
@@ -108,16 +109,8 @@ session_start();
         <div class="col-md-6">
           <div class="detail-box">
             <h3>
-              Login do usuário
+              Aqui terá as informações foto e tudo...
             </h3>
-            <form method="post" action="confirmalogin.php">
-            <label>CPF: </label>
-            <input name='cpf_usuario'><br>
-            <label>Senha: </label>
-            <input type='password' name='senha_usuario' /><br>
-            <button type='submit'>Logar</button><br>
-            <a href='cadastra.html'>Não tem login? Cadastre-se.</a>
-        </form>
           </div>
         </div>
       </div>
