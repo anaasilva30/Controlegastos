@@ -72,7 +72,8 @@ session_start();
                 if (isset($_SESSION['nome_usuario'])) {
                   $nome_usuario = $_SESSION['nome_usuario'];
                  
-                  print "<li class='nav-item'><a class='nav-link login-user' href='index.php'><i class='fa fa-dollar'></i>Gastos</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='gastos/index.php'><i class='fa fa-dollar'></i>Gastos</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='entrada/index.php'><i class='fa fa-dollar'></i>Entrada</a></li>";
                   print "<li class='nav-item'><a class='nav-link login-user' href='../usuario/perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
                   print "<li class='nav-item'><a class='nav-link' href='../usuario/logout.php'><i class='fa fa-sign-out'></i>Sair</a></li>";
                  
@@ -138,27 +139,6 @@ session_start();
 <br>
 </div>
     
-    <h3>Cadastro de Entrada</h3>
-    <form method='POST' action='inserir.php'>   
-    <label class="label_usuario">Valor: </label>
-    <input name='valor_gasto'><br>
-    <label class="label_usuario">Data: </label>
-    <input name='data_gasto' type="date"><br>
-    <label class="label_usuario">Descrição: </label>
-    <input name='descricao_gasto'><br>
-    <label class="label_usuario">Tipo: </label>
-    <select name='tipo_gasto'>
-        <option value="1">Pix</option>
-        <option value="2">Dinheiro</option>
-        <option value="3">Débito</option>
-        <option value="4">Crédito</option>
-        <option value="5">Transferência</option>
-    </select>
-    <br> 
-    <br>
-    <button type='submit'>Salvar</button>
-    <br><br><a href='pesquisa.php'>Pesquisa</a>
-</form>
 </div>
         </div>
       </div>
