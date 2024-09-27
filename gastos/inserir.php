@@ -1,7 +1,6 @@
 <?php
     session_start();
     $cpf_usuario = $_SESSION['cpf_usuario'];
- 
     $valor_gasto = $_POST['valor_gasto'];
     $data_gasto = $_POST['data_gasto'];
     $descricao_gasto = $_POST['descricao_gasto'];
