@@ -70,9 +70,9 @@ session_start();
                 if (isset($_SESSION['nome_usuario'])) {
                   $nome_usuario = $_SESSION['nome_usuario'];
                  
-                  print "<li class='nav-item'><a class='nav-link login-user' href='gastos/index.php'><i class='fa fa-dollar'></i>Gastos</a></li>";
-                  print "<li class='nav-item'><a class='nav-link login-user' href='entrada/index.php'><i class='fa fa-dollar'></i>Entrada</a></li>";
-                  print "<li class='nav-item'><a class='nav-link login-user' href='perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='../gastos/index.php'><i class='fa fa-dollar'></i>Gastos</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='../entrada/index.php'><i class='fa fa-dollar'></i>Entrada</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='../usuario/perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
                   print "<li class='nav-item'><a class='nav-link' href='../usuario/logout.php'><i class='fa fa-sign-out'></i>Sair</a></li>";
                  
                 } else {
@@ -119,7 +119,7 @@ session_start();
     <label class="label_usuario">Descrição: </label>
     <input name='descricao_gasto'><br>
     <label class="label_usuario">Tipo: </label>
-    <select name='tipo_gasto'>
+    <select name='tipo_entrada'>
         <option value="1">Pix</option>
         <option value="2">Dinheiro</option>
         <option value="3">Débito</option>
