@@ -113,11 +113,11 @@ session_start();
     <h3>Cadastro de Entrada</h3>
     <form method='POST' action='inserir.php'>   
     <label class="label_usuario">Valor: </label>
-    <input name='valor_gasto'><br>
+    <input name='valor_entrada'><br>
     <label class="label_usuario">Data: </label>
-    <input name='data_gasto' type="date"><br>
+    <input name='data_entrada' type="date"><br>
     <label class="label_usuario">Descrição: </label>
-    <input name='descricao_gasto'><br>
+    <input name='descricao_entrada'><br>
     <label class="label_usuario">Tipo: </label>
     <select name='tipo_entrada'>
         <option value="1">Pix</option>
@@ -131,7 +131,6 @@ session_start();
     <br>
     
     <button type='submit'>Salvar</button>
-    <br><br><a href='pesquisa.php'>Pesquisa</a>
 </form>
 <br>
 <br>
