@@ -52,6 +52,9 @@ session_start();
             <span>
             SaldoPrático
             </span>
+            <div class='logo'>
+              <img src="images/logo2.jpeg" alt = "logo">
+            </div>
           </a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
