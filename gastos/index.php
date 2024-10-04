@@ -1,5 +1,3 @@
-
-
 <?php
 // Inicia a sessao.
 session_start();
@@ -118,6 +116,17 @@ session_start();
     <input name='valor_gasto'><br>
     <label class="label_usuario">Data: </label>
     <input name='data_gasto' type="date"><br>
+    <label class="label_usuario">Setor: </label>
+    <select name='setor_gasto'>
+      <option value="1">Alimentação</option>
+      <option value="2">Vestimentas</option>
+      <option value="3">Contas residenciais</option>
+      <option value="4">Manunteção</option>
+      <option value="5">Saúde</option>
+      <option value="6">Educação</option>
+      <option value="7">Outro: </option>
+
+    </select><br>
     <label class="label_usuario">Descrição: </label>
     <input name='descricao_gasto'><br>
     <label class="label_usuario">Tipo: </label>

@@ -111,6 +111,24 @@ session_start();
           <div class="detail-box">
     
     <h3>Cadastro de Entrada</h3>
+<<<<<<< HEAD
+        <form method='POST' action='inserir.php'>   
+           <label class="label_usuario">Valor: </label>
+           <input name='valor_entrada'><br>
+           <label class="label_usuario">Data: </label>
+           <input name='data_entrada' type="date"><br>
+           <label class="label_usuario">Setor: </label>
+        <select name='setor_entrada'>   
+           <option value="1">Trabalho fixo</option>
+           <option value="2">Freelancer</option>
+           <option value="3">Extra</option>
+           <option value="4">Auxílio</option>
+           <option value="5">Presente</option>
+           <option value="6">Outro: </option>
+        </select><br>
+
+
+        
     <form method='POST' action='inserir.php'>   
     <label class="label_usuario">Valor: </label>
     <input name='valor_entrada'><br>

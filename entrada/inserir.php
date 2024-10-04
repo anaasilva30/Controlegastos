@@ -1,10 +1,12 @@
 <?php
+    session_start();
     # Recebe dados do FORM
     $valor_entrada = $_POST['valor_entrada'];
     $data_entrada = $_POST['data_entrada'];
     $descricao_entrada = $_POST['descricao_entrada'];
     $tipo_entrada = $_POST['tipo_entrada'];
     $cpf_usuario = $_SESSION['cpf_usuario'];
+
     
     # Conecta com BD
     include_once "../db/db.php";
