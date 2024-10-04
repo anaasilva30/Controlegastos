@@ -518,6 +518,10 @@ a:focus {
   padding: 50px;
 }
 
+.about_section .img-box-another img {
+  width: 520px;
+}
+
 .about_section .img-box img {
   max-width: 100%;
 }
