@@ -283,6 +283,12 @@ a:focus {
 
 .slider_section .detail-box {
   color: white;
+  
+}
+
+.label_login{
+  display: inline-block;
+  width: 80px;
 }
 
 .slider_section .detail-box h1 {
@@ -506,6 +512,10 @@ a:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.detail-box{
+  padding: 50px;
 }
 
 .about_section .img-box img {
@@ -963,3 +973,4 @@ a:focus {
 .logo img{
   height: 70px;
 }
+

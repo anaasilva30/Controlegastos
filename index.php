@@ -49,11 +49,11 @@ session_start();
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.php">
-            <span>
+            <div class='logo'>
+              <img src="images/imagemsemfundo.png" alt = "logo">
+              <span>
             SaldoPrático
             </span>
-            <div class='logo'>
-              <img src="images/logo2.jpeg" alt = "logo">
             </div>
           </a>
 

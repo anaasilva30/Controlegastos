@@ -46,10 +46,13 @@ session_start();
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <span>
-              ClearCash
+        <a class="navbar-brand" href="index.php">
+            <div class='logo'>
+              <img src="../images/imagemsemfundo.png" alt = "logo">
+              <span>
+            SaldoPrático
             </span>
+            </div>
           </a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -102,7 +105,7 @@ session_start();
       <div class="row">
         <div class="col-md-6 ">
           <div class="img-box">
-            <img src="../images/about-img.png" alt="">
+            <img src="../images/slider-img.png" alt="">
           </div>
         </div>
         <div class="col-md-6">
@@ -111,9 +114,9 @@ session_start();
               Login do usuário
             </h3>
             <form method="post" action="confirmalogin.php">
-            <label>CPF: </label>
+            <label class="label_login">CPF: </label>
             <input name='cpf_usuario'><br>
-            <label>Senha: </label>
+            <label class="label_login">Senha: </label>
             <input type='password' name='senha_usuario' /><br>
             <button type='submit'>Logar</button><br>
             <a href='cadastra.html'>Não tem login? Cadastre-se.</a>
