@@ -90,11 +90,17 @@ session_start();
         </nav>
       </div>
     </header>
-   
 
   <section class="about_section layout_padding">
     <div class="container  ">
       <div class="heading_container heading_center">
+      <?php
+            if(isset($_GET['cadastro'])){
+            ?>
+                <span style='color:green; border: 1px solid black; padding: 5px;border-radius:3px; margin-bottom: 10px;'>Cadastro Efetuado! <i class="fa fa-solid fa-exclamation-triangle" aria-hidden="true"></i></span>
+            <?php            
+            }
+        ?>
         <h2>
           Preencha seus dados e venha fazer parte do<span>ClearCash</span>
         </h2>

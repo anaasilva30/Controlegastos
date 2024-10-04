@@ -1,3 +1,8 @@
+<?php
+// Inicia a sessao.
+session_start();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,12 +48,9 @@
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.php">
-            <div class='logo'>
-              <img src="../images/imagemsemfundo.png" alt = "logo">
-              <span>
+            <span>
             SaldoPrático
             </span>
-            </div>
           </a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,14 +60,28 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
               <li class="nav-item active">
-                <a class="nav-link" href="../index.php">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../team.php">Equipe</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="indexg.php"> <i class="fa fa-user" aria-hidden="true"></i>Login</a>
-              </li>
+                <a class="nav-link" href="team.php">Equipe</a>
+              </li> 
+   
+
+              <?php
+                if (isset($_SESSION['nome_usuario'])) {
+                  $nome_usuario = $_SESSION['nome_usuario'];
+                 
+                  print "<li class='nav-item'><a class='nav-link login-user' href='gastos/index.php'><i class='fa fa-dollar'></i>Gastos</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='entrada/index.php'><i class='fa fa-dollar'></i>Entrada</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='usuario/perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
+                  print "<li class='nav-item'><a class='nav-link' href='usuario/logout.php'><i class='fa fa-sign-out'></i>Sair</a></li>";
+                 
+                } else {
+                  ?>
+                    <li class="nav-item"><a class="nav-link" href="usuario/indexg.php"> <i class="fa fa-user" aria-hidden="true"></i>Login</a></li>
+                  <?php                 
+                }
+              ?> 
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
@@ -74,50 +90,79 @@
             </ul>
           </div>
         </nav>
-      </div>
-    </header>
+			</div>
+			</header>
    
-
-  <section class="about_section layout_padding">
+			<section class="about_section layout_padding">
     <div class="container  ">
       <div class="heading_container heading_center">
-        <h2>
-          Preencha seus dados e venha fazer parte do <span>ClearCash</span>
-        </h2>
-        <p>
-          Centralize suas despesas e recebimentos e facilite gestão financeira.
-        </p>
-      </div>
-      <div class="row">
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="../images/about-img.png" alt="">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="detail-box">
-            <h3>
-              Cadastro do usuário
-            </h3>
-            <form method="post" action="salva.php">
-            <label class="label_usuario">CPF: </label>
-            <input name='cpf_usuario'><br>
-            <label class="label_usuario">Nome: </label>
-            <input name='nome_usuario'><br>
-            <label class="label_usuario">Telefone: </label>
-            <input name='telefone_usuario'><br>
-            <label class="label_usuario">E-mail: </label>
-            <input name='email_usuario'><br>
-            <label class="label_usuario">Senha: </label>
-            <input type="password" name="senha_usuario" /><br>
-            <button type='submit'>Logar</button>
-        </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+		
+		<h2>Pesquisa de registros</h2>
+		<form method="post" action="pesquisa.php">
+			<label>Data Inicial: </label>
+			<input type="date" name="data1" />
+			<label>Data Final: </label>
+			<input type="date" name="data2" />
+			<button type="submit">Pesquisar</button>
+		</form>
+		<h2>Listagem de Registros</h2>
+		<table border>
+			<tr>
+				<th>Valor: </th>
+				<th>Data: </th>
+				<th>Tipo: </th>
+				<th>Setor: </th>
+        <th>Descrição: </th>
+			</tr>
+		<?php
+			$data1 = '';
+			$data2 = '';
+			if (isset($_POST['data1'])){
+				$data1 = $_POST['data1'];
+			}
+			if (isset($_POST['data2'])){
+				$data2 = $_POST['data2'];
+			}
+				
+			/* Conectando com o banco de dados para listar registros */
+			$datasource = 'mysql:host=localhost;dbname=controlegastos';
+			$user = 'root';
+			$pass = 'vertrigo';
+			$db = new PDO($datasource, $user, $pass);
+	
+			$query = "SELECT * FROM entrada_usuario WHERE data_entrada BETWEEN ? AND ?";
+			$stm = $db -> prepare($query);
+			$stm->bindParam(1, $data1);
+			$stm->bindParam(2, $data2);
+			
+			if ($stm -> execute()) {
+				$result = $stm->fetchAll(PDO::FETCH_ASSOC);
+				foreach($result as $row) {
+					$valor_entrada = $row['Valor'];
+					$data_entrada = $row['Data'];
+					$tipo_entrada = $row['Tipo'];
+					$setor_entrada = $row['Setor'];
+					$descricao_entrada = $row['Descrição'];
+	
+					print "<tr>
+					<td>$valor_entrada</td>
+					<td>$data_entrada</td>
+					<td>$tipo_entrada</td>
+					<td>$setor_entrada</td>
+                    <td>$descricao_entrada</td>
+					<td><a href='delete.php?id=$data_entrada'>Excluir</a> | 	
+					<a href='edita.php?id=$data_entrada'>Editar</a></td>
+					</tr>";								
+				}				
+			} else {
+				print '<p>Erro ao listar registros!</p>';
+			}
+			
+		?>
+		</table>
+		</div>
+		</div>
+		</section>
   <!-- end about section -->
 
   <section class="info_section layout_padding2">
@@ -132,7 +177,7 @@
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  clearcashoficial@gmail.com
+                  saldopraticooficial@gmail.com
                 </span>
               </a>
             </div>
@@ -188,12 +233,12 @@
 
   <!-- end info section -->
 
-  <!-- footer section -->
-  <section class="footer_section">
+ <!-- footer section -->
+ <section class="footer_section">
     <div class="container">
       <p>
-        &copy; <span id="displayYear"></span>
-        <a>Equipe ClearCash</a>
+        &copy; <span id="displayYear">2024</span>
+        <a>Equipe SaldoPrático</a>
       </p>
     </div>
   </section>
@@ -217,13 +262,3 @@
   <!-- End Google Map -->
 
 </body>
-</html>
-
-
-
-
-
-
-
-
-
