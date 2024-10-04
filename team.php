@@ -102,7 +102,6 @@ session_start();
     </header>
     <!-- end header section -->
   </div>
-
   <!-- team section -->
   <section class="team_section layout_padding">
     <div class="container-fluid">
@@ -110,6 +109,9 @@ session_start();
         <h2 class="">
           Nossa <span>Equipe</span>
         </h2>
+        <p>
+             Estudantes do Instituto Federal Campus Pouso Alegre, finalizando o Técnico Integrado em Informática.
+        </p>
       </div>
 
       <div class="team_container">
