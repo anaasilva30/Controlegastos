@@ -108,7 +108,7 @@ session_start();
       <div class="heading_container heading_center">
         <h2 class="">
           Nossa <span>Equipe</span>
-        </h2>
+        </h2><br>
         <p>
              Estudantes do Instituto Federal Campus Pouso Alegre, finalizando o Técnico Integrado em Informática.
         </p>

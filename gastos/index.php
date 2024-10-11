@@ -70,7 +70,7 @@ session_start();
                 if (isset($_SESSION['nome_usuario'])) {
                   $nome_usuario = $_SESSION['nome_usuario'];
                  
-                  print "<li class='nav-item'><a class='nav-link login-user' href='gastos/index.php'><i class='fa fa-dollar'></i>Gastos</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='../gastos/index.php'><i class='fa fa-dollar'></i>Gastos</a></li>";
                   print "<li class='nav-item'><a class='nav-link login-user' href='../entrada/index.php'><i class='fa fa-dollar'></i>Entrada</a></li>";
                   print "<li class='nav-item'><a class='nav-link login-user' href='../usuario/perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
                   print "<li class='nav-item'><a class='nav-link' href='../usuario/logout.php'><i class='fa fa-sign-out'></i>Sair</a></li>";
@@ -101,6 +101,7 @@ session_start();
           Centralize suas despesas e recebimentos e facilite gestão financeira.
         </p>
       </div>
+      
       <div class="row">
         <div class="col-md-6 ">
           <div class="img-box">
@@ -108,16 +109,16 @@ session_start();
           </div>
         </div>
         <div class="col-md-6">
-          <div class="detail-box">
+        <div class="detail-box">
     
     <h3>Cadastro de Gastos</h3>
     <form method='POST' action='inserir.php'>   
     <label class="label_usuario">Valor: </label>
-    <input name='valor_gasto'><br>
+    <input name='valor_gasto' class="input_gasto"><br>
     <label class="label_usuario">Data: </label>
-    <input name='data_gasto' type="date"><br>
+    <input name='data_gasto' type="date" class="input_gasto"><br>
     <label class="label_usuario">Setor: </label>
-    <select name='setor_gasto'>
+    <select name='setor_gasto'  class="input_gasto">
       <option value="1">Alimentação</option>
       <option value="2">Vestimentas</option>
       <option value="3">Contas residenciais</option>
@@ -128,9 +129,9 @@ session_start();
 
     </select><br>
     <label class="label_usuario">Descrição: </label>
-    <input name='descricao_gasto'><br>
+    <input name='descricao_gasto'  class="input_gasto"><br>
     <label class="label_usuario">Tipo: </label>
-    <select name='tipo_gasto'>
+    <select name='tipo_gasto'  class="input_gasto">
         <option value="1">Pix</option>
         <option value="2">Dinheiro</option>
         <option value="3">Débito</option>
@@ -143,6 +144,7 @@ session_start();
     
     <button type='submit'>Salvar</button>
     <br><br><a href='pesquisa.php'>Pesquisa</a>
+    <br><br><a href=''>Gerar gráficos</a>
 </form>
 <br>
 <br>

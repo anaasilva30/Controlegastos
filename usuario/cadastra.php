@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="shortcut icon" href="../images/favicon.png" type="">
 
-  <title> Controle de Gastos </title>
+  <title> Saldo Prático </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
@@ -105,7 +105,7 @@
           <div class="detail-box">
             <h3>
               Cadastro do usuário
-            </h3>
+            </h3><br>
             <form method="post" action="salva.php">
             <label class="label_usuario">CPF: </label>
             <input name='cpf_usuario'><br>
@@ -116,7 +116,7 @@
             <label class="label_usuario">E-mail: </label>
             <input name='email_usuario'><br>
             <label class="label_usuario">Senha: </label>
-            <input type="password" name="senha_usuario" /><br>
+            <input type="password" name="senha_usuario" /><br><br>
             <button type='submit'>Logar</button>
         </form>
           </div>
@@ -139,7 +139,7 @@
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  clearcashoficial@gmail.com
+                  saldopraticooficial@gmail.com
                 </span>
               </a>
             </div>
@@ -200,7 +200,7 @@
     <div class="container">
       <p>
         &copy; <span id="displayYear"></span>
-        <a>Equipe ClearCash</a>
+        <a>Equipe SaldoPrático</a>
       </p>
     </div>
   </section>

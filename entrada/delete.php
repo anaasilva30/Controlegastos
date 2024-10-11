@@ -12,7 +12,7 @@
     $stm->execute(array($id_entrada));
 
     if($stm){
-        header("location:index.php");
+        header("location:pesquisaentrada.php");
     }
     else {
         print "<p>Erro ao remover</p>";

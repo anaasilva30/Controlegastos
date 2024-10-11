@@ -71,9 +71,9 @@ session_start();
                 if (isset($_SESSION['nome_usuario'])) {
                   $nome_usuario = $_SESSION['nome_usuario'];
                  
-                  print "<li class='nav-item'><a class='nav-link login-user' href='gastos/index.php'><i class='fa fa-dollar'></i>Gastos</a></li>";
-                  print "<li class='nav-item'><a class='nav-link login-user' href='entrada/index.php'><i class='fa fa-dollar'></i>Entrada</a></li>";
-                  print "<li class='nav-item'><a class='nav-link login-user' href='usuario/perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='../gastos/index.php'><i class='fa fa-dollar'></i>Gastos</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='../entrada/index.php'><i class='fa fa-dollar'></i>Entrada</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='../usuario/perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
                   print "<li class='nav-item'><a class='nav-link' href='usuario/logout.php'><i class='fa fa-sign-out'></i>Sair</a></li>";
                  
                 } else {
@@ -97,15 +97,15 @@ session_start();
     <div class="container  ">
       <div class="heading_container heading_center">
 		
-		<h2>Pesquisa de registros</h2>
-		<form method="post" action="pesquisa.php">
+		<h2>Pesquisa de registros</h2><br><br>
+		<form method="post" action="pesquisaentrada.php">
 			<label>Data Inicial: </label>
 			<input type="date" name="data1" />
 			<label>Data Final: </label>
-			<input type="date" name="data2" />
+			<input type="date" name="data2" /><br><br>
 			<button type="submit">Pesquisar</button>
-		</form>
-		<h2>Listagem de Registros</h2>
+		</form><br><br>
+		<h2>Listagem de Registros</h2><br><br>
 		<table border>
 			<tr>
 				<th>Valor: </th>
@@ -114,6 +114,9 @@ session_start();
 				<th>Setor: </th>
         <th>Descrição: </th>
 			</tr>
+
+
+      
 		<?php
 			$data1 = '';
 			$data2 = '';
@@ -138,11 +141,12 @@ session_start();
 			if ($stm -> execute()) {
 				$result = $stm->fetchAll(PDO::FETCH_ASSOC);
 				foreach($result as $row) {
-					$valor_entrada = $row['Valor'];
-					$data_entrada = $row['Data'];
-					$tipo_entrada = $row['Tipo'];
-					$setor_entrada = $row['Setor'];
-					$descricao_entrada = $row['Descrição'];
+          $id_entrada = $row['id_entrada'];
+					$valor_entrada = $row['valor_entrada'];
+					$data_entrada = $row['data_entrada'];
+					$tipo_entrada = $row['tipo_entrada'];
+					$setor_entrada = $row['setor_entrada'];
+					$descricao_entrada = $row['descricao_entrada'];
 	
 					print "<tr>
 					<td>$valor_entrada</td>
@@ -150,8 +154,8 @@ session_start();
 					<td>$tipo_entrada</td>
 					<td>$setor_entrada</td>
                     <td>$descricao_entrada</td>
-					<td><a href='delete.php?id=$data_entrada'>Excluir</a> | 	
-					<a href='edita.php?id=$data_entrada'>Editar</a></td>
+					<td><a href='delete.php?id=$id_entrada'>Excluir</a> | 	
+					<a href='edita.php?id=$id_entrada'>Editar</a></td>
 					</tr>";								
 				}				
 			} else {
@@ -160,6 +164,7 @@ session_start();
 			
 		?>
 		</table>
+    <br><br><a href='index.php'>Voltar</a>
 		</div>
 		</div>
 		</section>

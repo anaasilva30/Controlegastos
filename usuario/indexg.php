@@ -102,7 +102,7 @@ session_start();
             }
         ?>
         <h2>
-          Preencha seus dados e venha fazer parte do<span>ClearCash</span>
+          Preencha seus dados e venha fazer parte do<span>SaldoPrático</span>
         </h2>
         <p>
           Centralize suas despesas e recebimentos e facilite gestão financeira.
@@ -118,14 +118,14 @@ session_start();
           <div class="detail-box">
             <h3>
               Login do usuário
-            </h3>
+            </h3><br>
             <form method="post" action="confirmalogin.php">
             <label class="label_login">CPF: </label>
             <input name='cpf_usuario'><br>
             <label class="label_login">Senha: </label>
-            <input type='password' name='senha_usuario' /><br>
-            <button type='submit'>Logar</button><br>
-            <a href='cadastra.html'>Não tem login? Cadastre-se.</a>
+            <input type='password' name='senha_usuario' /><br><br>
+            <button type='submit'>Logar</button><br><br>
+            <a href='cadastra.php'>Não tem login? Cadastre-se.</a>
         </form>
           </div>
         </div>
@@ -147,7 +147,7 @@ session_start();
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  clearcashoficial@gmail.com
+                  saldopraticooficial@gmail.com
                 </span>
               </a>
             </div>
@@ -208,7 +208,7 @@ session_start();
     <div class="container">
       <p>
         &copy; <span id="displayYear"></span> 
-        <a>Equipe ClearCash</a>
+        <a>Equipe SaldoPrático</a>
       </p>
     </div>
   </section>

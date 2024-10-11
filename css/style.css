@@ -516,6 +516,7 @@ a:focus {
 
 .detail-box{
   padding: 50px;
+  margin-top: 15px;
 }
 
 .about_section .img-box-another img {
@@ -976,4 +977,16 @@ a:focus {
 
 .logo img{
   height: 70px;
+}
+
+.input_gasto{
+  width: 180px;
+}
+
+.input_entrada{
+  width: 180px;
+} 
+
+td, th{
+  padding: 6px;
 }

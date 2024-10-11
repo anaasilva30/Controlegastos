@@ -113,30 +113,22 @@ session_start();
     <h3>Cadastro de Entrada</h3>
         <form method='POST' action='inserir.php'>   
            <label class="label_usuario">Valor: </label>
-           <input name='valor_entrada'><br>
+           <input name='valor_entrada' class="input_entrada"><br>
            <label class="label_usuario">Data: </label>
-           <input name='data_entrada' type="date"><br>
+           <input name='data_entrada' type="date" class="input_entrada"><br>
            <label class="label_usuario">Setor: </label>
-        <select name='setor_entrada'>   
+        <select name='setor_entrada' class="input_entrada">   
            <option value="1">Trabalho fixo</option>
            <option value="2">Freelancer</option>
            <option value="3">Extra</option>
            <option value="4">Auxílio</option>
            <option value="5">Presente</option>
            <option value="6">Outro: </option>
-        </select><br>
-
-
-        
-    <form method='POST' action='inserir.php'>   
-    <label class="label_usuario">Valor: </label>
-    <input name='valor_entrada'><br>
-    <label class="label_usuario">Data: </label>
-    <input name='data_entrada' type="date"><br>
+        </select><br>   
     <label class="label_usuario">Descrição: </label>
-    <input name='descricao_entrada'><br>
+    <input name='descricao_entrada' class="input_entrada"><br>
     <label class="label_usuario">Tipo: </label>
-    <select name='tipo_entrada'>
+    <select name='tipo_entrada' class="input_entrada">
         <option value="1">Pix</option>
         <option value="2">Dinheiro</option>
         <option value="3">Débito</option>
@@ -148,6 +140,8 @@ session_start();
     <br>
     
     <button type='submit'>Salvar</button>
+    <br><br><a href='pesquisaentrada.php'>Pesquisa</a>
+    <br><br><a href=''>Gerar gráficos</a>
 </form>
 <br>
 <br>
