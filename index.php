@@ -122,7 +122,7 @@ session_start();
             <p>
               Inicie sua jornada rumo a uma gestão financeira mais estruturada e serena. Comece a administrar seus gastos com maior precisão e transparência. O caminho para o seu sucesso financeiro começa agora!
             </p>
-            <a href='usuario/cadastra.html'>Cadastre-se.</a>
+            <a href='usuario/cadastra.php'>Cadastre-se.</a>
           </div>
         </div>
       </div>

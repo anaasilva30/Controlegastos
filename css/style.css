@@ -501,7 +501,7 @@ a:focus {
 .about_section {
   background-color: white;
   color: black;
-  
+  min-height: 680px; /* Altura do conteúdo */
 }
 
 .about_section .heading_container {
@@ -520,7 +520,7 @@ a:focus {
 }
 
 .about_section .img-box-another img {
-  width: 520px;
+  width: 530px;
 }
 
 .about_section .img-box img {
@@ -631,6 +631,7 @@ a:focus {
   background-color: #00204a;
   color: #ffffff;
   background-position: left;
+
 }
 
 .team_section .heading_container {
@@ -990,3 +991,4 @@ a:focus {
 td, th{
   padding: 6px;
 }
+

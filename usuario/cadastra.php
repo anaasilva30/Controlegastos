@@ -98,7 +98,7 @@
       <div class="row">
         <div class="col-md-6 ">
           <div class="img-box">
-            <img src="../images/about-img.png" alt="">
+            <img src="../images/slider-img.png" alt="ceular">
           </div>
         </div>
         <div class="col-md-6">
