@@ -1,6 +1,32 @@
 <?php
 // Inicia a sessao.
 session_start();
+
+$cpf_usuario = $_SESSION['cpf_usuario'];
+
+/* Conectando com o banco de dados para listar registros */
+$datasource = 'mysql:host=localhost;dbname=controlegastos';
+$user = 'root';
+$pass = 'vertrigo';
+$db = new PDO($datasource, $user, $pass);
+
+$query = "SELECT * FROM cadastro_usuario WHERE cpf_usuario = ? ";
+$stm = $db -> prepare($query);
+$stm->bindParam(1, $cpf_usuario);
+
+if ($stm -> execute()) {
+  $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+  foreach($result as $row) {
+    $cpf_usuario = $row['cpf_usuario'];
+    $nome_usuario = $row['nome_usuario'];
+    $telefone_usuario = $row['telefone_usuario'];
+    $email_usuario = $row['email_usuario'];  
+    		
+  }				
+} else {
+  print '<p>Erro ao listar registros!</p>';
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -96,7 +122,7 @@ session_start();
           Perfil do <span>Usuário</span>
         </h2>
         <p>
-         Estamos felizes de te ter conosco!
+         Estamos felizes em te-lô conosco!
         </p>
       </div>
       <div class="row">
@@ -108,12 +134,29 @@ session_start();
         <div class="col-md-6">
           <div class="detail-box">
             <h3>
-              Aqui terá as informações foto e tudo...
-            </h3>
+              Informações:
+            </h3><br><br>
+            <form method="post" action="salva.php">
+            <label class="label_usuario">CPF: </label>
+            <input name='cpf_usuario' value='<?php print $cpf_usuario ?>' readonly><br>
+            <label class="label_usuario">Nome: </label>
+            <input name='nome_usuario' value='<?php print $nome_usuario ?>' readonly><br>
+            <label class="label_usuario">Telefone: </label>
+            <input name='telefone_usuario'value='<?php print $telefone_usuario ?>' readonly><br>
+            <label class="label_usuario">E-mail: </label>
+            <input name='email_usuario' value='<?php print $email_usuario ?>' readonly><br>
+            <label class="label_usuario">Senha: </label>
+            <input type="password" name="senha_usuario" value='<?php print $senha_usuario ?>' readonly><br><br>
+            <button type='submit'>Editar</button>
+            <button type='submit'>Atualizar</button>
+        </form>
+
+				
+			
           </div>
         </div>
       </div>
-    </div>
+    </div><br>
   </section>
 
   <!-- end about section -->
@@ -130,7 +173,7 @@ session_start();
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  clearcashoficial@gmail.com
+                  saldopraticooficial@gmail.com
                 </span>
               </a>
             </div>
@@ -191,7 +234,7 @@ session_start();
     <div class="container">
       <p>
         &copy; <span id="displayYear"></span> 
-        <a>Equipe ClearCash</a>
+        <a>Equipe SaldoPrático</a>
       </p>
     </div>
   </section>
