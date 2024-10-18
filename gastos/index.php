@@ -48,10 +48,13 @@ session_start();
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <span>
+        <a class="navbar-brand" href="index.php">
+            <div class='logo'>
+              <img src="../images/imagemsemfundo.png" alt = "logo">
+              <span>
             SaldoPrático
             </span>
+            </div>
           </a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,11 +84,6 @@ session_start();
                   <?php                 
                 }
               ?> 
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
             </ul>
           </div>
         </nav>

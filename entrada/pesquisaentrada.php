@@ -133,10 +133,16 @@ session_start();
 			$pass = 'vertrigo';
 			$db = new PDO($datasource, $user, $pass);
 	
-			$query = "SELECT * FROM entrada_usuario WHERE data_entrada BETWEEN ? AND ?";
-			$stm = $db -> prepare($query);
-			$stm->bindParam(1, $data1);
-			$stm->bindParam(2, $data2);
+      if(!empty($data1)){
+        $query = "SELECT * FROM entrada_usuario WHERE data_entrada BETWEEN ? AND ?";
+        $stm = $db -> prepare($query);
+        $stm->bindParam(1, $data1);
+        $stm->bindParam(2, $data2);
+      }
+      else {
+        $query = "SELECT * FROM entrada_usuario LIMIT 10"; 
+        $stm = $db -> prepare($query);
+      }
 			
 			if ($stm -> execute()) {
 				$result = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -149,14 +155,14 @@ session_start();
 					$descricao_entrada = $row['descricao_entrada'];
 	
 					print "<tr>
-					<td>$valor_entrada</td>
-					<td>$data_entrada</td>
-					<td>$tipo_entrada</td>
-					<td>$setor_entrada</td>
-                    <td>$descricao_entrada</td>
-					<td><a href='delete.php?id=$id_entrada'>Excluir</a> | 	
-					<a href='edita.php?id=$id_entrada'>Editar</a></td>
-					</tr>";								
+					        <td>$valor_entrada</td>
+					        <td>$data_entrada</td>
+					        <td>$tipo_entrada</td>
+					        <td>$setor_entrada</td>
+                  <td>$descricao_entrada</td>
+					        <td><a href='delete.php?id=$id_entrada'>Excluir</a> | 	
+                      <a href='edita.php?id=$id_entrada'>Editar</a></td>
+                </tr>";								
 				}				
 			} else {
 				print '<p>Erro ao listar registros!</p>';
