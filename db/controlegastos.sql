@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 06-Set-2024 às 10:51
+-- Generation Time: 18-Out-2024 às 12:07
 -- Versão do servidor: 5.7.25
 -- versão do PHP: 7.1.26
 
@@ -44,8 +44,16 @@ CREATE TABLE `cadastro_usuario` (
 
 INSERT INTO `cadastro_usuario` (`cpf_usuario`, `nome_usuario`, `telefone_usuario`, `email_usuario`, `senha_usuario`) VALUES
 ('00000', 'Rafa', '99777', 'rafafafa', '1234'),
+('000000', 'Ana', '99999999', 'ana@gmail.com', '123456'),
+('01961176661', 'Ana Clara', '99999', 'anaclara@gmail.com', '12345'),
+('01961176662', 'Clara', '9090', 'ana@gmail.com', '123'),
+('01961176673', 'Lauany fidelis', '99999', 'ana@gmail.com', '157'),
+('01961176674', 'Lauany fidelis', '99999', 'ana@gmail.com', '157'),
+('01961176675', 'Lauany fidelis', '99999', 'ana@gmail.com', '157'),
 ('111111', 'lav', '9987', 'lavinia', '0305'),
+('123456', 'Clara', '9999999', 'clara@gmail.com', '123'),
 ('1234567', 'Lavinia andrade', '1234567', 'laviniaaaa', '1234'),
+('12345678910', 'Berenice', '999999999', 'bere@gmail.com', '123456789'),
 ('22222', 'lav', '9987', 'lavinia', '0304'),
 ('555555', 'Rafa', '99777', 'rafafafa', '1234');
 
@@ -61,8 +69,19 @@ CREATE TABLE `entrada_usuario` (
   `data_entrada` varchar(12) NOT NULL,
   `descricao_entrada` varchar(255) NOT NULL,
   `tipo_entrada` enum('PIX','CRÉDITO','DÉBITO','BOLETO','TRANSFERÊNCIA','DINHEIRO') NOT NULL,
-  `cpf_usuario` char(14) DEFAULT NULL
+  `cpf_usuario` char(14) DEFAULT NULL,
+  `setor_entrada` enum('TRABALHO FIXO','FREELANCER','EXTRA','PRESENTE','AUXILIO','OUTRO:') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `entrada_usuario`
+--
+
+INSERT INTO `entrada_usuario` (`id_entrada`, `valor_entrada`, `data_entrada`, `descricao_entrada`, `tipo_entrada`, `cpf_usuario`, `setor_entrada`) VALUES
+(1, '', '', '', 'PIX', '00000', 'TRABALHO FIXO'),
+(2, '', '', 'pra pagar academia', 'CRÉDITO', '01961176661', 'TRABALHO FIXO'),
+(3, '100', '2024-10-11', '', 'CRÉDITO', '12345678910', 'TRABALHO FIXO'),
+(4, '', '', '', 'PIX', '12345678910', 'TRABALHO FIXO');
 
 -- --------------------------------------------------------
 
@@ -76,8 +95,19 @@ CREATE TABLE `gastos_usuario` (
   `data_gasto` varchar(12) NOT NULL,
   `descricao_gasto` varchar(255) NOT NULL,
   `tipo_gasto` enum('PIX','CRÉDITO','DÉBITO','BOLETO','TRANSFERÊNCIA','DINHEIRO') NOT NULL,
-  `cpf_usuario` char(14) DEFAULT NULL
+  `cpf_usuario` char(14) DEFAULT NULL,
+  `setor_gasto` enum('ALIMENTAÇÃO','VESTIMENTAS','CONTAS RESIDENCIAIS','MANUNTENÇÃO','SAÚDE','EDUCAÇÃO','OUTRO') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `gastos_usuario`
+--
+
+INSERT INTO `gastos_usuario` (`id_gasto`, `valor_gasto`, `data_gasto`, `descricao_gasto`, `tipo_gasto`, `cpf_usuario`, `setor_gasto`) VALUES
+(1, '7,00', '2024-09-27', 'alimentação', 'PIX', '00000', 'ALIMENTAÇÃO'),
+(3, '7,00', '2024-09-27', 'cantina', 'PIX', '00000', 'ALIMENTAÇÃO'),
+(5, '5,00', '2024-10-04', 'cantina', 'CRÉDITO', '01961176661', 'ALIMENTAÇÃO'),
+(6, '110', '2024-10-03', 'academia', 'CRÉDITO', '01961176661', 'ALIMENTAÇÃO');
 
 --
 -- Indexes for dumped tables
@@ -111,13 +141,13 @@ ALTER TABLE `gastos_usuario`
 -- AUTO_INCREMENT for table `entrada_usuario`
 --
 ALTER TABLE `entrada_usuario`
-  MODIFY `id_entrada` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_entrada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `gastos_usuario`
 --
 ALTER TABLE `gastos_usuario`
-  MODIFY `id_gasto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_gasto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
