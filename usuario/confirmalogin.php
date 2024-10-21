@@ -31,7 +31,10 @@ if ($row = $stm -> fetch()) {
 	header("location:../gastos/index.php");
 } else {
 	// Caso usuário ou senha estejam incorretos.
-	print "<p>Usuário e/ou Senha Inválidos!</p>";
-	print "<a href='indexg.html'>Voltar</a>";
+	
+    function loginerrado(){
+       alert('Usuário e/ou Senha Inválidos!');
+       print "<a href='indexg.html'>Voltar</a>";
+    }
 }
 ?>

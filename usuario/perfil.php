@@ -147,7 +147,7 @@ if ($stm -> execute()) {
             <input name='email_usuario' value='<?php print $email_usuario ?>' readonly><br>
             <label class="label_usuario">Senha: </label>
             <input type="password" name="senha_usuario" value='<?php print $senha_usuario ?>' readonly><br><br>
-            <button type='submit'>Editar</button>
+            <button href="edita.php" type='submit'>Editar</button>
             <button type='submit'>Atualizar</button>
         </form>
 
