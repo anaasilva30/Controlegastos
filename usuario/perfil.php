@@ -144,11 +144,9 @@ if ($stm -> execute()) {
             <label class="label_usuario">Telefone: </label>
             <input name='telefone_usuario'value='<?php print $telefone_usuario ?>' readonly><br>
             <label class="label_usuario">E-mail: </label>
-            <input name='email_usuario' value='<?php print $email_usuario ?>' readonly><br>
-            <label class="label_usuario">Senha: </label>
-            <input type="password" name="senha_usuario" value='<?php print $senha_usuario ?>' readonly><br><br>
-            <button href="edita.php" type='submit'>Editar</button>
-            <button type='submit'>Atualizar</button>
+            <input name='email_usuario' value='<?php print $email_usuario ?>' readonly><br><br>
+            <a href='edita.php'>Editar</a>
+            
         </form>
 
 				
