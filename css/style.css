@@ -992,5 +992,14 @@ td, th{
   padding: 6px;
 }
 
+.graficobarras{
+  width: 600px;
+  height: 900px;
+}
+.graficopizza{
+  margin-left: auto; 
+  width: 80%;
+}
+
 
 

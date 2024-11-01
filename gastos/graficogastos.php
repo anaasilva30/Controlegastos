@@ -12,6 +12,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="shortcut icon" href="../images/favicon.png" type="">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
   <title> Controle de Gastos </title>
 
@@ -100,13 +101,15 @@ session_start();
           Centralize suas despesas e recebimentos e facilite gestão financeira.
         </p>
       </div>
-      
+
+        <div class="graficobarras">
         <section class="about_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
           Setor <span>gastos</span>
         </h2>
+
         <canvas id="graficoGastos" width="400" height="200"></canvas> 
     <script>
         const contexto = document.getElementById('graficoGastos').getContext('2d');
@@ -138,11 +141,23 @@ session_start();
             options: opcoes
         });
     </script>
+    </div>
+    <div class="graficopizza">
+    <div id="myPlot" style="width:100%;max-width:700px"></div>
 
+    <script>
+      const xArray = ["Italy", "France", "Spain", "USA", "Argentina"];
+      const yArray = [55, 49, 44, 24, 15];
 
-</div>
-    
-</div>
+      const layout = {title:"World Wide Wine Production"};
+
+      const data = [{labels:xArray, values:yArray, type:"pie"}];
+
+      Plotly.newPlot("myPlot", data, layout);
+    </script>
+    </div>
+    </div>
+    </div>
         </div>
       </div>
     </div>
