@@ -107,7 +107,7 @@ session_start();
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
-          Setor <span>gastos</span>
+          Setor <span>gastos</span><br><br><br>
         </h2>
 
         <canvas id="graficoGastos" width="400" height="200"></canvas> 
@@ -146,10 +146,10 @@ session_start();
     <div id="myPlot" style="width:100%;max-width:700px"></div>
 
     <script>
-      const xArray = ["Italy", "France", "Spain", "USA", "Argentina"];
+      const xArray = ["Alimentação", "Vestimentas", "Contas residenciais", "Manutenção", "Saúde"];
       const yArray = [55, 49, 44, 24, 15];
 
-      const layout = {title:"World Wide Wine Production"};
+      const layout = {title:""};
 
       const data = [{labels:xArray, values:yArray, type:"pie"}];
 
