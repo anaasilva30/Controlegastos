@@ -1,3 +1,9 @@
+<?php
+// Inicia a sessao.
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,8 +11,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="shortcut icon" href="../images/favicon.png" type="">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <title> Saldo Prático </title>
+  <title> Controle de Gastos </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
@@ -42,7 +49,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="index.php">
             <div class='logo'>
               <img src="../images/imagemsemfundo.png" alt = "logo">
               <span>
@@ -58,70 +65,84 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
               <li class="nav-item active">
-                <a class="nav-link" href="perfil.php">Perfil <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../index.php">Home <span class="sr-only">(current)</span></a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../team.php">Equipe</a>
+              </li>
+              <?php
+                if (isset($_SESSION['nome_usuario'])) {
+                  $nome_usuario = $_SESSION['nome_usuario'];
+                 
+                  print "<li class='nav-item'><a class='nav-link login-user' href='../gastos/index.php'><i class='fa fa-dollar'></i>Gastos</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='../entrada/index.php'><i class='fa fa-dollar'></i>Entrada</a></li>";
+                  print "<li class='nav-item'><a class='nav-link login-user' href='../usuario/perfil.php'><i class='fa fa-user'></i>$nome_usuario</a></li>";
+                  print "<li class='nav-item'><a class='nav-link' href='../usuario/logout.php'><i class='fa fa-sign-out'></i>Sair</a></li>";
+                 
+                } else {
+                  ?>
+                    <li class="nav-item"><a class="nav-link" href="usuario/indexg.php"> <i class="fa fa-user" aria-hidden="true"></i>Login</a></li>
+                  <?php                 
+                }
+              ?> 
             </ul>
           </div>
         </nav>
       </div>
     </header>
-   
-
   <section class="about_section layout_padding">
     <div class="container  ">
       <div class="heading_container heading_center">
-      <?php
-            if(isset($_GET['cadastro'])){
-            ?>
-                <span style='color:red; border: 1px solid red; padding: 5px;border-radius:3px; margin-bottom: 10px;'>Erro ao cadastrar! CPF duplicado. <i class="fa fa-solid fa-exclamation-triangle" aria-hidden="true"></i></span>
-            <?php            
-            }
-        ?>
         <h2>
-          Edite seus dados <span>aqui!</span>
+          Gráfico dos <span>recebimentos</span>
         </h2>
+        <p>
+          Centralize suas despesas e recebimentos e facilite gestão financeira.
+        </p>
       </div>
-      <div class="row">
-        <div class="col-md-6 ">
-        <div class="img-box">
-            <img src="../images/slider-img.png" alt="ceular">
-        </div>
-        </div>
-        <div class="col-md-6">
-          <div class="detail-box">
-            
-        <h3>Editar cadastro de usuário</h3><br>
-        <div class="edita">
-        <form method='POST' action='salva.php'>
-        <label>Nome: </label>
-        <input name='nome_usuario'><br>
-        <label>CPF: </label>
-        <input name='cpf_usuario'><br>
-        <label>Telefone: </label>
-        <input name='telefone_usuario'><br>
-        <label>E-mail: </label>
-        <input name='email_usuario'><br>
-        <label>Senha: </label>
-        <input type='password' name='senha_usuario'><br><br></div>
-        <button type='submit'>Salvar  </button> 
-        <button type='submit'>Atualizar</button>
-</form>
-<br>
+      
+        <section class="about_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Setor<span>entrada</span>
+        </h2>
+        <canvas id="graficoGastos" width="400" height="200"></canvas> 
+    <script>
+        const contexto = document.getElementById('graficoGastos').getContext('2d');
+        const setores = ['Trabalho fixo', 'Freelancer', 'Extra', 'Auxílio', 'Presente', 'Outro']; // setores de entrada
+        const valores = [200, 150, 300, 100, 250, 300, 400]; // valores gastos correspondentes
 
-<?php
-    # Conecta com BD
-    $ds = "mysql:host=localhost;dbname=controlegastos";
-    $con = new PDO($ds, 'root', 'vertrigo');
+        const dados = {
+            labels: setores,
+            datasets: [{
+                label: 'Valor entrada por Setor',
+                data: valores,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
 
-    # Seleciona todos os registros
-    $sql = "SELECT * FROM cadastro_usuario";
-    $stm = $con->prepare($sql);
-    $stm->execute();
+        const opcoes = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
 
-   
-?>
-</table>
+        const graficoGastos = new Chart(contexto, {
+            type: 'bar',
+            data: dados,
+            options: opcoes
+        });
+    </script>
 
+
+</div>
+    
+</div>
         </div>
       </div>
     </div>
@@ -130,7 +151,7 @@
   <!-- end about section -->
 
   <section class="info_section layout_padding2">
-    <div class="container">
+    <div class="containergastos">
       <div class="row">
         <div class="col-md-6 col-lg-3 info_col">
           <div class="info_contact">
@@ -141,7 +162,7 @@
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  saldopraticooficial@gmail.com
+                  saldopraticoficial@gmail.com
                 </span>
               </a>
             </div>
@@ -171,10 +192,10 @@
               Links
             </h4>
             <div class="info_links">
-              <a class="active" href="index.html">
+              <a class="active" href="index.php">
                 Home
               </a>
-              <a class="" href="team.html">
+              <a class="" href="team.php">
                 Equipe
               </a>
             </div>
@@ -201,7 +222,7 @@
   <section class="footer_section">
     <div class="container">
       <p>
-        &copy; <span id="displayYear"></span>
+        &copy; <span id="displayYear">2024</span>
         <a>Equipe SaldoPrático</a>
       </p>
     </div>
