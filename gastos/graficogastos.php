@@ -11,6 +11,7 @@ session_start();
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="shortcut icon" href="../images/favicon.png" type="">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <title> Controle de Gastos </title>
 
@@ -93,59 +94,52 @@ session_start();
     <div class="container  ">
       <div class="heading_container heading_center">
         <h2>
-          Preencha seus dados e venha fazer parte do <span>SaldoPrático</span>
+          Gráfico dos seus <span>gastos</span>
         </h2>
         <p>
           Centralize suas despesas e recebimentos e facilite gestão financeira.
         </p>
       </div>
       
-      <div class="row">
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="../images/about-img.png" alt="">
-          </div>
-        </div>
-        <div class="col-md-6">
-        <div class="detail-box">
-    
-    <h3>Cadastro de Gastos</h3>
-    <form method='POST' action='inserir.php'>   
-    <label class="label_usuario">Valor: </label>
-    <input name='valor_gasto' class="input_gasto"><br>
-    <label class="label_usuario">Data: </label>
-    <input name='data_gasto' type="date" class="input_gasto"><br>
-    <label class="label_usuario">Setor: </label>
-    <select name='setor_gasto'  class="input_gasto">
-      <option value="1">Alimentação</option>
-      <option value="2">Vestimentas</option>
-      <option value="3">Contas residenciais</option>
-      <option value="4">Manunteção</option>
-      <option value="5">Saúde</option>
-      <option value="6">Educação</option>
-      <option value="7">Outro: </option>
+        <section class="about_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Setor <span>gastos</span>
+        </h2>
+        <canvas id="graficoGastos" width="400" height="200"></canvas> 
+    <script>
+        const contexto = document.getElementById('graficoGastos').getContext('2d');
+        const setores = ['Alimentação', 'Vestimentas', 'Contas residenciais', 'Manutenção', 'Saúde', 'Educação', 'Outro']; // setores de gasto
+        const valores = [200, 150, 300, 100, 250, 300, 400]; // valores gastos correspondentes
 
-    </select><br>
-    <label class="label_usuario">Descrição: </label>
-    <input name='descricao_gasto'  class="input_gasto"><br>
-    <label class="label_usuario">Tipo: </label>
-    <select name='tipo_gasto'  class="input_gasto">
-        <option value="1">Pix</option>
-        <option value="2">Dinheiro</option>
-        <option value="3">Débito</option>
-        <option value="4">Crédito</option>
-        <option value="5">Transferência</option>
+        const dados = {
+            labels: setores,
+            datasets: [{
+                label: 'Valor Gasto por Setor',
+                data: valores,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
 
-    </select>
-    <br> 
-    <br>
-    
-    <button type='submit'>Salvar</button>
-    <br><br><a href='pesquisa.php'>Pesquisa</a>
-    <br><br><a href='graficogastos.php'>Gerar gráficos</a>
-</form>
-<br>
-<br>
+        const opcoes = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        const graficoGastos = new Chart(contexto, {
+            type: 'bar',
+            data: dados,
+            options: opcoes
+        });
+    </script>
+
+
 </div>
     
 </div>
@@ -157,7 +151,7 @@ session_start();
   <!-- end about section -->
 
   <section class="info_section layout_padding2">
-    <div class="container">
+    <div class="containergastos">
       <div class="row">
         <div class="col-md-6 col-lg-3 info_col">
           <div class="info_contact">
@@ -254,12 +248,3 @@ session_start();
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
