@@ -12,6 +12,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="shortcut icon" href="../images/favicon.png" type="">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
   <title> Controle de Gastos </title>
 
@@ -100,23 +101,25 @@ session_start();
           Centralize suas despesas e recebimentos e facilite gestão financeira.
         </p>
       </div>
-      
+
+        <div class="graficobarras">
         <section class="about_section layout_padding">
-    <div class="container">
+    <div class="containergrafico">
       <div class="heading_container heading_center">
         <h2>
-          Setor<span>entrada</span>
+          Setor <span> entrada</span>
         </h2>
-        <canvas id="graficoGastos" width="400" height="200"></canvas> 
+
+        <canvas id="graficoEntrada" width="400" height="200"></canvas> 
     <script>
-        const contexto = document.getElementById('graficoGastos').getContext('2d');
+        const contexto = document.getElementById('graficoEntrada').getContext('2d');
         const setores = ['Trabalho fixo', 'Freelancer', 'Extra', 'Auxílio', 'Presente', 'Outro']; // setores de entrada
-        const valores = [200, 150, 300, 100, 250, 300, 400]; // valores gastos correspondentes
+        const valores = [200, 150, 300, 100, 250, 300, 400]; // valores entrada correspondentes
 
         const dados = {
             labels: setores,
             datasets: [{
-                label: 'Valor entrada por Setor',
+                label: 'Valor recebido por Setor',
                 data: valores,
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
@@ -132,17 +135,65 @@ session_start();
             }
         };
 
-        const graficoGastos = new Chart(contexto, {
+        const graficoEntrada = new Chart(contexto, {
+            type: 'bar',
+            data: dados,
+            options: opcoes
+        });
+
+        <h2>
+          Tipo de <span> entrada</span>
+        </h2>
+
+        <canvas id="graficoEntrada" width="400" height="200"></canvas> 
+    <script>
+        const contexto = document.getElementById('graficoEntrada').getContext('2d');
+        const setores = ['Dinheiro', 'Pix', '', 'Auxílio', 'Presente', 'Outro']; // setores de entrada
+        const valores = [200, 150, 300, 100, 250, 300, 400]; // valores entrada correspondentes
+
+        const dados = {
+            labels: setores,
+            datasets: [{
+                label: 'Valor recebido por Setor',
+                data: valores,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const opcoes = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        const graficoEntrada = new Chart(contexto, {
             type: 'bar',
             data: dados,
             options: opcoes
         });
     </script>
+    </div>
+    <div class="graficopizza">
+    <div id="myPlot" style="width:100%;max-width:700px"></div>
 
+    <script>
+      const xArray = ['Trabalho fixo', 'Freelancer', 'Extra', 'Auxílio', 'Presente', 'Outro']; // setores de entrada
 
-</div>
-    
-</div>
+      const yArray = [55, 49, 44, 24, 15];
+
+      const layout = {title:"Setor entrada"};
+
+      const data = [{labels:xArray, values:yArray, type:"pie"}];
+
+      Plotly.newPlot("myPlot", data, layout);
+    </script>
+    </div>
+    </div>
+    </div>
         </div>
       </div>
     </div>
