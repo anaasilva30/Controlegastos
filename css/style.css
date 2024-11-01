@@ -992,8 +992,18 @@ td, th{
   padding: 6px;
 }
 
+<<<<<<< HEAD
 .edita{
   width: 180px;
+=======
+.graficobarras{
+  width: 600px;
+  height: 900px;
+}
+.graficopizza{
+  margin-left: auto; 
+  width: 80%;
+>>>>>>> 0f9815547d365df2b98a366cafd012aa7a46c7ba
 }
 
 
