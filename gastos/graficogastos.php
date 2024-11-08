@@ -102,7 +102,7 @@ session_start();
         </p>
         
       </div>
-        <form method="post" action="graficosentrada.php">
+        <form method="post" action="graficogastos.php">
           <label>Data Inicial: </label><br>
           <input type="date" name="data1" />
           <label>Data Final: </label><br>
@@ -116,20 +116,17 @@ session_start();
           </h2>
         </div>
         <section class="about_section layout_padding">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Setor <span>gastos</span><br><br><br>
-        </h2>
-
+        <div class="grafBloco1">
+        <div class="containerBarra">
         <canvas id="graficoGasto" width="500" height="400"></canvas> 
         <script>
           var setor_val = {
-            fixo: 0,
-            freelancer: 0,
-            extra: 0, 
-            presente: 0, 
-            auxilio: 0,
+            alimentacao: 0,
+            vestimentas: 0,
+            residencial: 0, 
+            manuntencao: 0, 
+            saude: 0,
+            educacao: 0,
             outro: 0
           }
         <?php
@@ -171,14 +168,26 @@ session_start();
 					$total_valor = $row['total_valor'];	
 					
           if ($setor == "ALIMENTAÇÃO"){
-            print "setor_val.fixo=$total_valor;";
+            print "setor_val.alimentacao=$total_valor;";
           }
           else if ($setor == "VESTIMENTAS"){
-            print "setor_val.freelancer=$total_valor;";
+            print "setor_val.vestimentas=$total_valor;";
           }E
-          else if ($setor == "CONTAS RESIDENCIAIS"){
-            print "setor_val.auxilio=$total_valor;";
+          else if ($setor == "CONTAS_RESIDENCIAIS"){
+            print "setor_val.residencial=$total_valor;";
           }			
+          else if ($setor == "MANUNTENÇÃO"){
+            print "setor_val.manuntencao=$total_valor;";
+          }		
+          else if ($setor == "SAÚDE"){
+            print "setor_val.saude=$total_valor;";
+          }		
+          else if ($setor == "EDUCAÇÃO"){
+            print "setor_val.educacao=$total_valor;";
+          }		
+          else if ($setor == "OUTRO"){
+            print "setor_val.outro=$total_valor;";
+          }		
 				}				
 			} else {
 				print '<p>Erro ao listar registros!</p>';
@@ -187,14 +196,14 @@ session_start();
 ?>
    
       
-        const contexto = document.getElementById('graficoEntrada').getContext('2d');
-        const setores = ['Trabalho fixo', 'Freelancer', 'Extra', 'Auxílio', 'Presente', 'Outro']; // setores de entrada
-        const valores = [setor_val.fixo, setor_val.freelancer, setor_val.extra, setor_val.auxilio, setor_val.presente, setor_val.outro]; // valores entrada correspondentes
+        const contexto = document.getElementById('graficoGasto').getContext('2d');
+        const setores = ['ALIMENTAÇÃO','VESTIMENTAS','CONTAS RESIDENCIAIS','MANUNTENÇÃO','SAÚDE','EDUCAÇÃO','OUTRO']; // setores de gastos
+        const valores = [setor_val.alimentacao, setor_val.vestimentas, setor_val.residencial, setor_val.manuntencao, setor_val.saude, setor_val.educacao,setor_val.outro ]; // valores entrada correspondentes
 
         const dados = {
             labels: setores,
             datasets: [{
-                label: 'Valor recebido por Setor',
+                label: 'Valor gasto por Setor',
                 data: valores,
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
@@ -210,7 +219,7 @@ session_start();
             }
         };
 
-        const graficoEntrada = new Chart(contexto, {
+        const graficoGntrada = new Chart(contexto, {
             type: 'bar',
             data: dados,
             options: opcoes
@@ -223,9 +232,8 @@ session_start();
 
     <script>
       const xArray = ["Alimentação", "Vestimentas", "Contas residenciais", "Manutenção", "Saúde"];
-      const yArray = [55, 49, 44, 24, 15];
+      const yArray = [setor_val.alimentacao, setor_val.vestimentas, setor_val.residencial, setor_val.manuntencao, setor_val.saude, setor_val.educacao,setor_val.outro ];
 
-      const layout = {title:""};
 
       const data = [{labels:xArray, values:yArray, type:"pie"}];
 

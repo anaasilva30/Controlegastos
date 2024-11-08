@@ -174,9 +174,18 @@ session_start();
           else if ($setor == "FREELANCER"){
             print "setor_val.freelancer=$total_valor;";
           }
+          else if ($setor == "EXTRA"){
+            print "setor_val.extra=$total_valor;";
+          }		
+          else if ($setor == "PRESENTE"){
+            print "setor_val.presente=$total_valor;";
+          }	
           else if ($setor == "AUXÍLIO"){
             print "setor_val.auxilio=$total_valor;";
-          }			
+          }
+          else if ($setor == "OUTRO"){
+            print "setor_val.outro=$total_valor;";
+          }
 				}				
 			} else {
 				print '<p>Erro ao listar registros!</p>';
