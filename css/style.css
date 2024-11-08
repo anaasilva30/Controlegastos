@@ -992,13 +992,15 @@ td, th{
   padding: 6px;
 }
 
+
+.edita{
+  width: 180px;
+}
 .graficobarras{
   width: 600px;
   height: 900px;
 }
 .graficopizza{
- 
+  margin-left: auto; 
+  width: 80%;
 }
-
-
-
