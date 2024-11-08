@@ -116,9 +116,11 @@ session_start();
           </h2>
         </div>
         <section class="about_section layout_padding">
-          <div class='grafBloco1'>
-    <div class="containerBarra">
-      
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Setor <span>gastos</span><br><br><br>
+        </h2>
 
         <canvas id="graficoGasto" width="500" height="400"></canvas> 
         <script>
@@ -220,9 +222,10 @@ session_start();
     <div id="myPlot" style="width:400px;"></div>
 
     <script>
-      const xArray = ['Trabalho fixo', 'Freelancer', 'Extra', 'Auxílio', 'Presente', 'Outro']; // setores de entrada
+      const xArray = ["Alimentação", "Vestimentas", "Contas residenciais", "Manutenção", "Saúde"];
+      const yArray = [55, 49, 44, 24, 15];
 
-      const yArray = [setor_val.fixo, setor_val.freelancer, setor_val.extra, setor_val.auxilio, setor_val.presente, setor_val.outro];
+      const layout = {title:""};
 
       const data = [{labels:xArray, values:yArray, type:"pie"}];
 
