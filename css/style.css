@@ -996,11 +996,26 @@ td, th{
 .edita{
   width: 180px;
 }
+
 .graficobarras{
-  width: 600px;
-  height: 900px;
+  flex: 1; /* faz com que as divs ocupem o mesmo espaço */
+  margin: 10px; /* espaço entre as divs */
+  height: 80px; /* altura fixa */
+  width: 1px;
+  box-sizing: border-box;
 }
+
 .graficopizza{
-  margin-left: auto; 
-  width: 80%;
+  flex: 1; /* faz com que as divs ocupem o mesmo espaço */
+  margin: 10px; /* espaço entre as divs */
+  height: 80px; /* altura fixa */
+  width: 5px;
+  box-sizing: border-box;
 }
+
+.containergrafico{
+  display: flex;
+  justify-content:baseline;
+}
+
+
