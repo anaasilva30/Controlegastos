@@ -997,25 +997,26 @@ td, th{
   width: 180px;
 }
 
-.graficobarras{
-  flex: 1; /* faz com que as divs ocupem o mesmo espaço */
+.graficoWrap{
+  width: 840px; /* faz com que as divs ocupem o mesmo espaço */
   margin: 10px; /* espaço entre as divs */
-  height: 80px; /* altura fixa */
-  width: 1px;
-  box-sizing: border-box;
+  height: 900px; /* altura fixa */
+  /*width: 1px;*/
+  border:1px solid black;  
+  
 }
 
 .graficopizza{
-  flex: 1; /* faz com que as divs ocupem o mesmo espaço */
-  margin: 10px; /* espaço entre as divs */
-  height: 80px; /* altura fixa */
-  width: 5px;
-  box-sizing: border-box;
+  width: 400px; /* faz com que as divs ocupem o mesmo espaço */
+  height: 400px; /* altura fixa */  
+  border:1px solid black;
+  float: left;
+  display: inline;
+  margin-top: -100px;
 }
 
-.containergrafico{
-  display: flex;
-  justify-content:baseline;
+.containerBarra{
+  width: 400px;
+  float: left;
+  display: inline;
 }
-
-

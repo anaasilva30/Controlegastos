@@ -92,7 +92,7 @@ session_start();
       </div>
     </header>
   <section class="about_section layout_padding">
-    <div class="container  ">
+    <div class="container">
       <div class="heading_container heading_center">
         <h2>
           Gráfico dos <span>recebimentos</span>
@@ -100,21 +100,94 @@ session_start();
         <p>
           Centralize suas despesas e recebimentos e facilite gestão financeira.
         </p>
+        
       </div>
-
-        <div class="graficobarras">
+        <form method="post" action="graficosentrada.php">
+          <label>Data Inicial: </label>
+          <input type="date" name="data1" />
+          <label>Data Final: </label>
+          <input type="date" name="data2" /><br><br>
+          <button type="submit">Gerar</button><br><br>
+        </form>
+        <div class="graficoWrap">
+        <div class="heading_container heading_center">          
+          <h2>
+            Setor <span> entrada</span>
+          </h2>
+        </div>
         <section class="about_section layout_padding">
-    <div class="containergrafico">
-      <div class="heading_container heading_center">
-        <h2>
-          Setor <span> entrada</span>
-        </h2>
+          <div class='grafBloco1'>
+    <div class="containerBarra">
+      
 
-        <canvas id="graficoEntrada" width="400" height="200"></canvas> 
-    <script>
+        <canvas id="graficoEntrada" width="500" height="400"></canvas> 
+        <script>
+          var setor_val = {
+            fixo: 0,
+            freelancer: 0,
+            extra: 0, 
+            presente: 0, 
+            auxilio: 0,
+            outro: 0
+          }
+        <?php
+			$data1 = '';
+			$data2 = '';
+			if (isset($_POST['data1'])){
+				$data1 = $_POST['data1'];
+			}
+			if (isset($_POST['data2'])){
+				$data2 = $_POST['data2'];
+			}
+				
+			/* Conectando com o banco de dados para listar registros */
+			$datasource = 'mysql:host=localhost;dbname=controlegastos';
+			$user = 'root';
+			$pass = 'vertrigo';
+			$db = new PDO($datasource, $user, $pass);
+	
+			$query = "SELECT 
+                    setor_entrada,
+                    SUM(valor_entrada) AS total_valor
+                FROM 
+                    entrada_usuario
+                WHERE 
+                    data_entrada BETWEEN ? AND ?
+                GROUP BY 
+                    setor_entrada
+                ORDER BY 
+                    FIELD(setor_entrada, 'TRABALHO FIXO', 'FREELANCER', 'EXTRA', 'PRESENTE', 'AUXILIO', 'OUTRO');
+                ";
+			$stm = $db -> prepare($query);
+			$stm->bindParam(1, $data1);
+			$stm->bindParam(2, $data2);
+			
+			if ($stm -> execute()) {
+				$result = $stm->fetchAll(PDO::FETCH_ASSOC);
+				foreach($result as $row) {
+          $setor = $row['setor_entrada'];
+					$total_valor = $row['total_valor'];	
+					
+          if ($setor == "TRABALHO FIXO"){
+            print "setor_val.fixo=$total_valor;";
+          }
+          else if ($setor == "FREELANCER"){
+            print "setor_val.freelancer=$total_valor;";
+          }
+          else if ($setor == "AUXÍLIO"){
+            print "setor_val.auxilio=$total_valor;";
+          }			
+				}				
+			} else {
+				print '<p>Erro ao listar registros!</p>';
+        print_r ($stm->errorInfo());
+			}
+?>
+   
+      
         const contexto = document.getElementById('graficoEntrada').getContext('2d');
         const setores = ['Trabalho fixo', 'Freelancer', 'Extra', 'Auxílio', 'Presente', 'Outro']; // setores de entrada
-        const valores = [200, 150, 300, 100, 250, 300, 400]; // valores entrada correspondentes
+        const valores = [setor_val.fixo, setor_val.freelancer, setor_val.extra, setor_val.auxilio, setor_val.presente, setor_val.outro]; // valores entrada correspondentes
 
         const dados = {
             labels: setores,
@@ -140,63 +213,34 @@ session_start();
             data: dados,
             options: opcoes
         });
-
-        <h2>
-          Tipo de <span> entrada</span>
-        </h2>
-
-        <canvas id="graficoEntrada" width="400" height="200"></canvas> 
-    <script>
-        const contexto = document.getElementById('graficoEntrada').getContext('2d');
-        const setores = ['Dinheiro', 'Pix', '', 'Auxílio', 'Presente', 'Outro']; // setores de entrada
-        const valores = [200, 150, 300, 100, 250, 300, 400]; // valores entrada correspondentes
-
-        const dados = {
-            labels: setores,
-            datasets: [{
-                label: 'Valor recebido por Setor',
-                data: valores,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        };
-
-        const opcoes = {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        };
-
-        const graficoEntrada = new Chart(contexto, {
-            type: 'bar',
-            data: dados,
-            options: opcoes
-        });
+        
     </script>
     </div>
     <div class="graficopizza">
-    <div id="myPlot" style="width:100%;max-width:700px"></div>
+    <div id="myPlot" style="width:400px;"></div>
 
     <script>
       const xArray = ['Trabalho fixo', 'Freelancer', 'Extra', 'Auxílio', 'Presente', 'Outro']; // setores de entrada
 
-      const yArray = [55, 49, 44, 24, 15];
-
-      const layout = {title:"Setor entrada"};
+      const yArray = [setor_val.fixo, setor_val.freelancer, setor_val.extra, setor_val.auxilio, setor_val.presente, setor_val.outro];
 
       const data = [{labels:xArray, values:yArray, type:"pie"}];
 
-      Plotly.newPlot("myPlot", data, layout);
+      Plotly.newPlot("myPlot", data);
     </script>
     </div>
+       
     </div>
+    
     </div>
+    
         </div>
+        
       </div>
-    </div>
+        <div class='grafBloco2'>
+
+
+      </div>
   </section>
 
   <!-- end about section -->

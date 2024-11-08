@@ -1,3 +1,33 @@
+<?php
+// Inicia a sessao.
+session_start();
+
+$cpf_usuario = $_SESSION['cpf_usuario'];
+
+/* Conectando com o banco de dados para listar registros */
+$datasource = 'mysql:host=localhost;dbname=controlegastos';
+$user = 'root';
+$pass = 'vertrigo';
+$db = new PDO($datasource, $user, $pass);
+
+$query = "SELECT * FROM cadastro_usuario WHERE cpf_usuario = ? ";
+$stm = $db -> prepare($query);
+$stm->bindParam(1, $cpf_usuario);
+
+if ($stm -> execute()) {
+  $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+  foreach($result as $row) {
+    $cpf_usuario = $row['cpf_usuario'];
+    $nome_usuario = $row['nome_usuario'];
+    $telefone_usuario = $row['telefone_usuario'];
+    $email_usuario = $row['email_usuario'];  
+    		
+  }				
+} else {
+  print '<p>Erro ao listar registros!</p>';
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,19 +122,19 @@
             
         <h3>Editar cadastro de usuário</h3><br>
         <div class="edita">
-        <form method='POST' action='salva.php'>
-        <label>Nome: </label>
-        <input name='nome_usuario'><br>
-        <label>CPF: </label>
-        <input name='cpf_usuario'><br>
-        <label>Telefone: </label>
-        <input name='telefone_usuario'><br>
-        <label>E-mail: </label>
-        <input name='email_usuario'><br>
-        <label>Senha: </label>
-        <input type='password' name='senha_usuario'><br><br></div>
-        <button type='submit'>Salvar  </button> 
-        <button type='submit'>Atualizar</button>
+        <form method='POST' action='atualiza.php'>
+          <label>CPF: </label>
+          <input name='cpf_usuario' value='<?php print $cpf_usuario ?>' readonly><br>
+          <label>Nome: </label>
+          <input name='nome_usuario' value='<?php print $nome_usuario ?>'><br>
+          <label>Telefone: </label>
+          <input name='telefone_usuario' value='<?php print $telefone_usuario ?>'><br>
+          <label>E-mail: </label>
+          <input name='email_usuario' value='<?php print $email_usuario ?>'><br>
+          <label>Senha: </label>
+          <input type='password' name='senha_usuario'><br><br></div>
+          <button type='button' onclick="window.open('perfil.php', '_self')">Cancelar</button> 
+          <button type='submit'>Atualizar</button>
 </form>
 <br>
 

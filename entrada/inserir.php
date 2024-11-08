@@ -6,15 +6,16 @@
     $descricao_entrada = $_POST['descricao_entrada'];
     $tipo_entrada = $_POST['tipo_entrada'];
     $cpf_usuario = $_SESSION['cpf_usuario'];
+    $setor_entrada = $_POST['setor_entrada'];
 
     
     # Conecta com BD
     include_once "../db/db.php";
 
     # Insere no BD
-    $sql = "INSERT INTO entrada_usuario (valor_entrada, data_entrada, descricao_entrada, tipo_entrada, cpf_usuario) VALUES(?,?,?,?,?)";
+    $sql = "INSERT INTO entrada_usuario (valor_entrada, data_entrada, descricao_entrada, tipo_entrada, cpf_usuario, setor_entrada) VALUES(?,?,?,?,?,?)";
     $stm = $con->prepare($sql);
-    $r = $stm->execute(array($valor_entrada, $data_entrada, $descricao_entrada, $tipo_entrada, $cpf_usuario));
+    $r = $stm->execute(array($valor_entrada, $data_entrada, $descricao_entrada, $tipo_entrada, $cpf_usuario, $setor_entrada));
 
     # Verificar inserção
     if($r){
