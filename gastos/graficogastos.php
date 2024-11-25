@@ -104,8 +104,16 @@ session_start();
   <section class="about_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
+        <?php
+        $nome_mes = "";
+            if ($mes){
+            setlocale(LC_TIME, 'pt_BR.UTF-8'); // Definindo a localidade para português do Brasil
+            $dataNome = DateTime::createFromFormat('!m', $mes); // Cria o objeto DateTime
+            $nome_mes = strftime('%B', $dataNome->getTimestamp()); // Retorna o mês por extenso
+          }
+        ?>
         <h2>
-          Gráfico dos <span>Gastos</span> de <?php print "$mes/$ano" ?>
+          Gráfico dos <span>Gastos</span> de <?php print "$nome_mes/$ano" ?>
         </h2>
         <p>
           Centralize suas despesas e recebimentos e facilite gestão financeira.
@@ -128,7 +136,7 @@ session_start();
               <option value="11">Novembro</option>
               <option value="12">Dezembro</option>
           </select>
-          <label>   Ano: </label>
+          <label>Ano: </label>
           <select name="ano">
               <?php
               // Obter o ano atual
@@ -136,12 +144,12 @@ session_start();
 
               // Loop para gerar os últimos 10 anos
               for ($i = 0; $i < 10; $i++) {
-                  $ano = $anoAtual - $i;  // Subtrai i do ano atual para obter os anos anteriores
-                  echo "<option value='$ano'>$ano</option>";
+                  $anoOption = $anoAtual - $i;  // Subtrai i do ano atual para obter os anos anteriores
+                  echo "<option value='$anoOption'>$anoOption</option>";
               }
               ?>
           </select>
-          <button type="submit">  Gerar</button><br><br>
+          <button type="submit">Gerar</button><br><br>
         </form>
         <div class="graficoWrap">
         <div class="heading_container heading_center">          
@@ -151,15 +159,22 @@ session_start();
         </div>
         <section class="about_section layout_padding">
           <div class='grafBloco1'>
-    <div class="containerBarra">
+   
       
-    <div id="myPlot" style="width:400px;"></div>
+    <div id="myPlot" style="width:800px;"></div>
         <script>
         let x = [];
-      let y = [];
+        let y = [];
+        let yCredito = [];
+        let yPix = [];
+        let yBoleto = [];
+
       for (let i = 1; i <= 31; i++) {
           x.push(i);
           y.push(0);
+          yCredito.push(0);
+          yPix.push(0);
+          yBoleto.push(0);
       }
         <?php
 			
@@ -168,7 +183,7 @@ session_start();
   
       $ultimoDiaDoMes = new DateTime("$ano-$mes-31");
       $dataFinal = $ultimoDiaDoMes->format('Y-m-d');  // Formato: YYYY-MM-DD
-      				
+          				
 			/* Conectando com o banco de dados para listar registros */
 			$datasource = 'mysql:host=localhost;dbname=controlegastos';
 			$user = 'root';
@@ -184,9 +199,7 @@ session_start();
 			$stm = $db -> prepare($query);
 			$stm->bindParam(1, $dataInicial);
 			$stm->bindParam(2, $dataFinal);
-
-      print_r($stm);
-			
+		
 			if ($stm -> execute()) {
 				$result = $stm->fetchAll(PDO::FETCH_ASSOC);
 				foreach($result as $row) {
@@ -228,23 +241,134 @@ session_start();
         
         
     </script>
-    </div>
-    <div class="graficopizza">
-    <div id="myPlot2" style="width:400px;"></div>
+    
+
+
 
     
-    </div>
-       
-    </div>
-    
-    </div>
-    
-        </div>
+      
         
       </div>
         <div class='grafBloco2'>
+        <div id="myPlot2" style="width:800px;"></div>
+<script>
+    <?php
+      # Carregando gastos em crédito por dia
+      $query = "SELECT *, DAY(data_gasto) AS dia
+                  FROM 
+                  gastos_usuario
+                  WHERE 
+                  data_gasto BETWEEN ? AND ? AND tipo_gasto = 'CRÉDITO'";
+      $stm = $db -> prepare($query);
+      $stm->bindParam(1, $dataInicial);
+      $stm->bindParam(2, $dataFinal);
+
+      if ($stm -> execute()) {
+      $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+      foreach($result as $row) {
+        $valor = $row['valor_gasto'];
+        $dia = $row['dia'];	
+
+        print "yCredito[$dia] = $valor;";
+      }				
+      } else {
+        print '<p>Erro ao listar registros!</p>';
+        print_r ($stm->errorInfo());
+      }
+
+      # Carregando gastos em pix por dia
+      $query = "SELECT 
+      *, DAY(data_gasto) AS dia
+      FROM 
+      gastos_usuario
+      WHERE 
+      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'PIX'";
+      $stm = $db -> prepare($query);
+      $stm->bindParam(1, $dataInicial);
+      $stm->bindParam(2, $dataFinal);
 
 
+      if ($stm -> execute()) {
+      $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+      foreach($result as $row) {
+      $valor = $row['valor_gasto'];
+      $dia = $row['dia'];	
+
+      print "yPix[$dia] = $valor;";
+      }				
+      } else {
+      print '<p>Erro ao listar registros!</p>';
+      print_r ($stm->errorInfo());
+      }
+
+      # Carregando gastos em boleto por dia
+      $query = "SELECT 
+      *, DAY(data_gasto) AS dia
+      FROM 
+      gastos_usuario
+      WHERE 
+      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'BOLETO'";
+      $stm = $db -> prepare($query);
+      $stm->bindParam(1, $dataInicial);
+      $stm->bindParam(2, $dataFinal);
+
+
+      if ($stm -> execute()) {
+      $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+      foreach($result as $row) {
+      $valor = $row['valor_gasto'];
+      $dia = $row['dia'];	
+
+      print "yBoleto[$dia] = $valor;";
+      }				
+      } else {
+      print '<p>Erro ao listar registros!</p>';
+      print_r ($stm->errorInfo());
+      }
+    ?>
+
+
+// Dados para o gráfico de linhas
+var dados2 = [
+    {
+        x: x, // Eixo X (Mês)
+        y: yPix, // Eixo Y (Gastos)
+        type: 'scatter', // Tipo de gráfico (scatter = gráfico de linhas)
+        mode: 'lines+markers', // Mostrar linhas e marcadores (pontos)
+        name: 'Pix' // Nome da série
+    },
+    {
+        x: x, // Eixo X (Mês)
+        y: yCredito, // Eixo Y (Vendas)
+        type: 'scatter', // Tipo de gráfico (scatter = gráfico de linhas)
+        mode: 'lines+markers', // Mostrar linhas e marcadores (pontos)
+        name: 'Crédito' // Nome da série
+    },
+    {
+        x: x, // Eixo X (Mês)
+        y: yBoleto, // Eixo Y (Lucros)
+        type: 'scatter', // Tipo de gráfico (scatter = gráfico de linhas)
+        mode: 'lines+markers', // Mostrar linhas e marcadores (pontos)
+        name: 'Boleto' // Nome da série
+    }
+];
+
+// Layout do gráfico (título, labels dos eixos, etc.)
+var layout2 = {
+    title: 'Análise de Gastos, Vendas e Lucros', // Título do gráfico
+    xaxis: {
+        title: 'Meses' // Título do eixo X
+    },
+    yaxis: {
+        title: 'Valores' // Título do eixo Y
+    }
+};
+
+// Criar o gráfico em um elemento com id 'grafico'
+Plotly.newPlot('myPlot2', dados2, layout2);
+
+</script>
+</div>
       </div>
   </section>
 
