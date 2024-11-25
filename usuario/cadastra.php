@@ -101,7 +101,7 @@
             <h3>
               Faça seu cadastro!
             </h3><br>
-            <form method="post" action="salva.php" enctype='multipart/form-data'>
+            <form method="post" action="salva.php">
             <label class="label_usuario">CPF: </label>
             <input name='cpf_usuario'><br>
             <label class="label_usuario">Nome: </label>
@@ -112,11 +112,7 @@
             <input name='email_usuario'><br>
             <label class="label_usuario">Senha: </label>
             <input type="password" name="senha_usuario" /><br>
-            <label class="label_usuario">Foto de perfil: </label>
-            <input type="file" name="foto_perfil" />
-            
-
-            
+                       
             <button type='submit'>Logar</button>
         </form>
           </div>

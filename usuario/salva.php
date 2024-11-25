@@ -13,35 +13,8 @@
 	$pass = 'vertrigo';
 	$db = new PDO($datasource, $user, $pass);
 	
-	// Variável para armazenar o nome do arquivo da foto de perfil
-	$foto_perfil = null;
-
-	// Verifica se um arquivo foi enviado
-	if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] == UPLOAD_ERR_OK) {
-    $foto_perfil = $_FILES['foto_perfil']['name'];
-    $extensao = pathinfo($foto_perfil, PATHINFO_EXTENSION);
-    $extensao = strtolower($extensao);
-
-    // Verifica a extensão do arquivo
-    if (in_array($extensao, ['jpg', 'jpeg', 'gif', 'png'])) {
-        $novoNome = uniqid(time()) . '.' . $extensao;
-        $destino = 'imagens/' . $novoNome;
-        
-        // Move o arquivo para o diretório de destino
-        if (move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $destino)) {
-            $foto_perfil = $novoNome;
-        } else {
-            echo "Erro ao enviar a imagem.";
-            exit;
-        }
-    } else {
-        echo "Tipo de arquivo não permitido.";
-        exit;
-    }
-} else {
-    // Define uma foto padrão se nenhuma foto for enviada
+	
     $foto_perfil = 'perfil.png';
-}
 
 
 	$query = "INSERT INTO cadastro_usuario (cpf_usuario, nome_usuario, telefone_usuario, email_usuario, senha_usuario, foto_perfil) VALUES(?,?,?,?,?,?)";			

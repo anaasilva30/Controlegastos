@@ -122,7 +122,7 @@ if ($stm -> execute()) {
             
         <h3>Editar cadastro de usuário</h3><br>
         <div class="edita">
-        <form method='POST' action='atualiza.php'>
+        <form method='POST' action='atualiza.php' enctype='multipart/form-data'>
           <label>CPF: </label>
           <input name='cpf_usuario' value='<?php print $cpf_usuario ?>' readonly><br>
           <label>Nome: </label>
@@ -131,40 +131,16 @@ if ($stm -> execute()) {
           <input name='telefone_usuario' value='<?php print $telefone_usuario ?>'><br>
           <label>E-mail: </label>
           <input name='email_usuario' value='<?php print $email_usuario ?>'><br>
-          <label>Senha: </label>
-          <input type='password' name='senha_usuario'><br><br></div>
+          <label>Senha: </label>          
+          <input type='password' name='senha_usuario'><br>
+          <label class="label_usuario">Foto de perfil: </label>
+          <input type="file" name="foto_perfil" />
           <button type='button' onclick="window.open('perfil.php', '_self')">Cancelar</button> 
           <button type='submit'>Atualizar</button>
 </form>
 <br>
+</div>
 
-<?php
-    # Conecta com BD
-    $ds = "mysql:host=localhost;dbname=controlegastos";
-    $con = new PDO($ds, 'root', 'vertrigo');
-
-    # Seleciona todos os registros
-    $sql = "SELECT * FROM cadastro_usuario";
-    $stm = $con->prepare($sql);
-    $stm->execute();
-
-    # Percorre os registros
-    foreach($stm as $row){
-        $cpf = $row['cpf_usuario'];
-        echo "<tr>";
-        echo "<td>" . $cpf . "</td>";
-        echo "<td>" . $row['cpf_usuario'] . "</td>";
-        echo "<td>" . $row['nome_usuario'] . "</td>";
-        echo "<td>" . $row['telefone_usuario'] . "</td>";
-        echo "<td>" . $row['email_usuario'] . "</td>";
-        echo "<td>" . $row['senha_usuario'] . "</td>";
-        echo "<td>
-                <a href='edita.php?cpf_usuario=$cpf'>Editar</a>
-             </td>"; 
-        echo "</tr>";
-    }
-?>
-</table>
 
         </div>
       </div>
