@@ -14,7 +14,7 @@ session_start();
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-  <title> Controle de Gastos </title>
+  <title> Controle de Entrada </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />

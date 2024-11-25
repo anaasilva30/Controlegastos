@@ -998,21 +998,22 @@ td, th{
 }
 
 .graficoWrap{
-  width: 840px; /* faz com que as divs ocupem o mesmo espaço */
-  margin: 10px; /* espaço entre as divs */
+  width: 870px; /* faz com que as divs ocupem o mesmo espaço */
+  margin: 10px auto; /* espaço entre as divs */
   height: 900px; /* altura fixa */
   /*width: 1px;*/
-  border:1px solid black;  
+  /*border:1px solid black;  */
   
 }
 
 .graficopizza{
-  width: 400px; /* faz com que as divs ocupem o mesmo espaço */
+  width: 440px; /* faz com que as divs ocupem o mesmo espaço */
   height: 400px; /* altura fixa */  
-  border:1px solid black;
+  /*border:1px solid black;*/
   float: left;
-  display: inline;
-  margin-top: -100px;
+  display:inline;
+  margin-top: -90px;
+  margin-left: 20px;
 }
 
 .containerBarra{

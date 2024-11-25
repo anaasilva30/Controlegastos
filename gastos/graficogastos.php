@@ -2,6 +2,16 @@
 // Inicia a sessao.
 session_start();
 
+
+			$mes = '';
+			$ano = '';
+			if (isset($_POST['mes'])){
+				$mes = $_POST['mes'];
+			}
+			if (isset($_POST['ano'])){
+				$ano = $_POST['ano'];
+			}
+
 ?>
 
 <!DOCTYPE html>
@@ -95,50 +105,70 @@ session_start();
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
-          Gráfico dos <span>gastos</span>
+          Gráfico dos <span>Gastos</span> de <?php print "$mes/$ano" ?>
         </h2>
         <p>
           Centralize suas despesas e recebimentos e facilite gestão financeira.
         </p>
         
       </div>
-        <form method="post" action="graficogastos.php">
-          <label>Data Inicial: </label><br>
-          <input type="date" name="data1" />
-          <label>Data Final: </label><br>
-          <input type="date" name="data2" /><br><br>
-          <button type="submit">Gerar</button><br><br>
+      <form method="post" action="graficogastos.php">
+          <label>Mês: </label>
+          <select name="mes">
+              <option value="1">Janeiro</option>
+              <option value="2">Fevereiro</option>
+              <option value="3">Março</option>
+              <option value="4">Abril</option>
+              <option value="5">Maio</option>
+              <option value="6">Junho</option>
+              <option value="7">Julho</option>
+              <option value="8">Agosto</option>
+              <option value="9">Setembro</option>
+              <option value="10">Outubro</option>
+              <option value="11">Novembro</option>
+              <option value="12">Dezembro</option>
+          </select>
+          <label>   Ano: </label>
+          <select name="ano">
+              <?php
+              // Obter o ano atual
+              $anoAtual = date('Y');
+
+              // Loop para gerar os últimos 10 anos
+              for ($i = 0; $i < 10; $i++) {
+                  $ano = $anoAtual - $i;  // Subtrai i do ano atual para obter os anos anteriores
+                  echo "<option value='$ano'>$ano</option>";
+              }
+              ?>
+          </select>
+          <button type="submit">  Gerar</button><br><br>
         </form>
         <div class="graficoWrap">
         <div class="heading_container heading_center">          
           <h2>
-            Setor <span> gastos</span>
+            Setor <span> Gastos</span>
           </h2>
         </div>
         <section class="about_section layout_padding">
-        <div class="grafBloco1">
-        <div class="containerBarra">
-        <canvas id="graficoGasto" width="500" height="400"></canvas> 
+          <div class='grafBloco1'>
+    <div class="containerBarra">
+      
+    <div id="myPlot" style="width:400px;"></div>
         <script>
-          var setor_val = {
-            alimentacao: 0,
-            vestimentas: 0,
-            residencial: 0, 
-            manuntencao: 0, 
-            saude: 0,
-            educacao: 0,
-            outro: 0
-          }
+        let x = [];
+      let y = [];
+      for (let i = 1; i <= 31; i++) {
+          x.push(i);
+          y.push(0);
+      }
         <?php
-			$data1 = '';
-			$data2 = '';
-			if (isset($_POST['data1'])){
-				$data1 = $_POST['data1'];
-			}
-			if (isset($_POST['data2'])){
-				$data2 = $_POST['data2'];
-			}
-				
+			
+      $primeiroDiaDoMes = new DateTime("$ano-$mes-01");
+      $dataInicial = $primeiroDiaDoMes->format('Y-m-d');  // Formato: YYYY-MM-DD
+  
+      $ultimoDiaDoMes = new DateTime("$ano-$mes-31");
+      $dataFinal = $ultimoDiaDoMes->format('Y-m-d');  // Formato: YYYY-MM-DD
+      				
 			/* Conectando com o banco de dados para listar registros */
 			$datasource = 'mysql:host=localhost;dbname=controlegastos';
 			$user = 'root';
@@ -146,99 +176,63 @@ session_start();
 			$db = new PDO($datasource, $user, $pass);
 	
 			$query = "SELECT 
-                    setor_gasto,
-                    SUM(valor_gasto) AS total_valor
+                    *, DAY(data_gasto) AS dia
                 FROM 
-                    gasto_usuario
+                    gastos_usuario
                 WHERE 
-                    data_gasto BETWEEN ? AND ?
-                GROUP BY 
-                    setor_gasto
-                ORDER BY 
-                    FIELD(setor_gasto, 'ALIMENTAÇÃO','VESTIMENTAS','CONTAS RESIDENCIAIS','MANUNTENÇÃO','SAÚDE','EDUCAÇÃO','OUTRO');
-                ";
+                    data_gasto BETWEEN ? AND ?";
 			$stm = $db -> prepare($query);
-			$stm->bindParam(1, $data1);
-			$stm->bindParam(2, $data2);
+			$stm->bindParam(1, $dataInicial);
+			$stm->bindParam(2, $dataFinal);
+
+      print_r($stm);
 			
 			if ($stm -> execute()) {
 				$result = $stm->fetchAll(PDO::FETCH_ASSOC);
 				foreach($result as $row) {
-          $setor = $row['setor_gasto'];
-					$total_valor = $row['total_valor'];	
+          $valor = $row['valor_gasto'];
+					$dia = $row['dia'];	
 					
-          if ($setor == "ALIMENTAÇÃO"){
-            print "setor_val.alimentacao=$total_valor;";
-          }
-          else if ($setor == "VESTIMENTAS"){
-            print "setor_val.vestimentas=$total_valor;";
-          }E
-          else if ($setor == "CONTAS_RESIDENCIAIS"){
-            print "setor_val.residencial=$total_valor;";
-          }			
-          else if ($setor == "MANUNTENÇÃO"){
-            print "setor_val.manuntencao=$total_valor;";
-          }		
-          else if ($setor == "SAÚDE"){
-            print "setor_val.saude=$total_valor;";
-          }		
-          else if ($setor == "EDUCAÇÃO"){
-            print "setor_val.educacao=$total_valor;";
-          }		
-          else if ($setor == "OUTRO"){
-            print "setor_val.outro=$total_valor;";
-          }		
+          print "y[$dia] = $valor;";
 				}				
 			} else {
 				print '<p>Erro ao listar registros!</p>';
         print_r ($stm->errorInfo());
 			}
 ?>
-   
-      
-        const contexto = document.getElementById('graficoGasto').getContext('2d');
-        const setores = ['ALIMENTAÇÃO','VESTIMENTAS','CONTAS RESIDENCIAIS','MANUNTENÇÃO','SAÚDE','EDUCAÇÃO','OUTRO']; // setores de gastos
-        const valores = [setor_val.alimentacao, setor_val.vestimentas, setor_val.residencial, setor_val.manuntencao, setor_val.saude, setor_val.educacao,setor_val.outro ]; // valores entrada correspondentes
+        
 
-        const dados = {
-            labels: setores,
-            datasets: [{
-                label: 'Valor gasto por Setor',
-                data: valores,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        };
+      // Dados para o gráfico de linhas
+      var dados = [{
+            x: x,  // Eixo X (Mês)
+            y: y,             // Eixo Y (Vendas)
+            type: 'scatter',                         // Tipo de gráfico (scatter = gráfico de linhas)
+            mode: 'lines+markers',                   // Mostrar linhas e marcadores (pontos)
+            name: 'Gastos'                           // Nome da série
+        }];
 
-        const opcoes = {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+        // Layout do gráfico (título, labels dos eixos, etc.)
+        var layout = {
+            title: 'Gastos do Mês',       // Título do gráfico
+            xaxis: {
+                title: 'Dias'                        // Título do eixo X
+            },
+            yaxis: {
+                title: 'Valores'                     // Título do eixo Y
             }
         };
 
-        const graficoGntrada = new Chart(contexto, {
-            type: 'bar',
-            data: dados,
-            options: opcoes
-        });
+        // Criar o gráfico em um elemento com id 'grafico'
+        Plotly.newPlot('myPlot', dados, layout);
+   
+        
         
     </script>
     </div>
     <div class="graficopizza">
-    <div id="myPlot" style="width:400px;"></div>
+    <div id="myPlot2" style="width:400px;"></div>
 
-    <script>
-      const xArray = ["Alimentação", "Vestimentas", "Contas residenciais", "Manutenção", "Saúde"];
-      const yArray = [setor_val.alimentacao, setor_val.vestimentas, setor_val.residencial, setor_val.manuntencao, setor_val.saude, setor_val.educacao,setor_val.outro ];
-
-
-      const data = [{labels:xArray, values:yArray, type:"pie"}];
-
-      Plotly.newPlot("myPlot", data);
-    </script>
+    
     </div>
        
     </div>
@@ -354,4 +348,3 @@ session_start();
 
 </body>
 </html>
-

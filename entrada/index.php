@@ -139,7 +139,7 @@ session_start();
     
     <button type='submit'>Salvar</button>
     <br><br><a href='pesquisaentrada.php'>Pesquisa</a>
-    <br><br><a href=''>Gerar gráficos</a>
+    <br><br><a href='graficosentrada.php'>Gerar gráficos</a>
 </form>
 <br>
 <br>
