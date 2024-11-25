@@ -1020,3 +1020,12 @@ td, th{
   float: left;
   display: inline;
 }
+
+.foto_perfil {
+  height: 100px;
+  width: 100px;
+  border: solid 3px black;
+  border-radius: 15px;
+  display: block;
+  margin: 20px auto;
+}

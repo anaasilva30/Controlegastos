@@ -14,6 +14,8 @@ $query = "SELECT * FROM cadastro_usuario WHERE cpf_usuario = ? ";
 $stm = $db -> prepare($query);
 $stm->bindParam(1, $cpf_usuario);
 
+$foto_perfil = "perfil.php";
+
 if ($stm -> execute()) {
   $result = $stm->fetchAll(PDO::FETCH_ASSOC);
   foreach($result as $row) {
@@ -21,6 +23,8 @@ if ($stm -> execute()) {
     $nome_usuario = $row['nome_usuario'];
     $telefone_usuario = $row['telefone_usuario'];
     $email_usuario = $row['email_usuario'];  
+    $foto_perfil = $row['foto_perfil'] ?:"perfil.png";
+
     		
   }				
 } else {
@@ -125,17 +129,12 @@ if ($stm -> execute()) {
          Estamos felizes em te-lô conosco!
         </p>
       </div>
-      <div class="row">
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="../images/about-img.png" alt="">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="detail-box">
-            <h3>
-              Informações:
-            </h3><br><br>
+      
+    <section class="about_section layout_padding">
+      <div class="container  ">
+      <div class="heading_container heading_center">
+            
+            <img src="imagens/<?php echo htmlspecialchars($foto_perfil); ?>" class="foto_perfil" alt="Foto de Perfil">
             <form method="post" action="salva.php">
             <label class="label_usuario">CPF: </label>
             <input name='cpf_usuario' value='<?php print $cpf_usuario ?>' readonly><br>

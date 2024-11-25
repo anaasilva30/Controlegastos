@@ -119,7 +119,6 @@ if ($stm -> execute()) {
         </div>
         <div class="col-md-6">
           <div class="detail-box">
-<<<<<<< HEAD
             
         <h3>Editar cadastro de usuário</h3><br>
         <div class="edita">
@@ -136,22 +135,6 @@ if ($stm -> execute()) {
           <input type='password' name='senha_usuario'><br><br></div>
           <button type='button' onclick="window.open('perfil.php', '_self')">Cancelar</button> 
           <button type='submit'>Atualizar</button>
-=======
-            <h3>Editar cadastro de usuário</h3><br><br>
-        <form method='POST' action='salva.php'>
-        <label>Nome: </label>
-        <input name='nome_usuario'><br>
-        <label>CPF: </label>
-        <input name='cpf_usuario'><br>
-        <label>Telefone: </label>
-        <input name='telefone_usuario'><br>
-        <label>E-mail: </label>
-        <input name='email_usuario'><br>
-        <label>Senha: </label>
-        <input type='password' name='senha_usuario'><br><br>
-        <button type='submit'>Salvar  </button> 
-        <button type='submit'>Atualizar</button>
->>>>>>> 0514b4e17705dfddba6f77ecd14ad568548aee65
 </form>
 <br>
 

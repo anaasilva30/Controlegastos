@@ -84,7 +84,7 @@
             }
         ?>
         <h2>
-          Preencha seus dados e venha fazer parte do <span>SaldoPrático</span>
+          Preencha seus dados e venha fazer parte do <span>Saldo Prático</span>
         </h2>
         <p>
           Centralize suas despesas e recebimentos e facilite gestão financeira.
@@ -93,15 +93,15 @@
       <div class="row">
         <div class="col-md-6 ">
           <div class="img-box">
-            <img src="../images/slider-img.png" alt="ceular">
+            <img style="magin-left=100px; max-width: 60%" src="../images/w4.png">
           </div>
         </div>
         <div class="col-md-6">
           <div class="detail-box">
             <h3>
-              Cadastro do usuário
+              Faça seu cadastro!
             </h3><br>
-            <form method="post" action="salva.php">
+            <form method="post" action="salva.php" enctype='multipart/form-data'>
             <label class="label_usuario">CPF: </label>
             <input name='cpf_usuario'><br>
             <label class="label_usuario">Nome: </label>
@@ -111,7 +111,12 @@
             <label class="label_usuario">E-mail: </label>
             <input name='email_usuario'><br>
             <label class="label_usuario">Senha: </label>
-            <input type="password" name="senha_usuario" /><br><br>
+            <input type="password" name="senha_usuario" /><br>
+            <label class="label_usuario">Foto de perfil: </label>
+            <input type="file" name="foto_perfil" />
+            
+
+            
             <button type='submit'>Logar</button>
         </form>
           </div>
