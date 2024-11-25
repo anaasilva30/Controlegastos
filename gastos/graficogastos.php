@@ -158,7 +158,7 @@ session_start();
           </h2>
         </div>
         <section class="about_section layout_padding">
-          <div class='grafBloco1'>
+          <div class='grafBloco1'> <!-- inicio regiao graf 1 -->
    
       
     <div id="myPlot" style="width:800px;"></div>
@@ -248,8 +248,8 @@ session_start();
     
       
         
-      </div>
-        <div class='grafBloco2'>
+      </div><!-- fim regiao graf 1 -->
+        <div class='grafBloco2'><!-- inicio regiao graf 2 -->
         <div id="myPlot2" style="width:800px;"></div>
 <script>
     <?php
@@ -368,7 +368,7 @@ var layout2 = {
 Plotly.newPlot('myPlot2', dados2, layout2);
 
 </script>
-</div>
+</div><!-- fim regiao graf 2 -->
       </div>
   </section>
 
