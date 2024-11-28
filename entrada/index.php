@@ -108,7 +108,7 @@ session_start();
         <div class="col-md-6">
           <div class="detail-box">
     
-    <h3>Cadastro de Entrada</h3>
+    <h3>Cadastro de Entrada</h3><br>
         <form method='POST' action='inserir.php'>   
            <label class="label_usuario">Valor: </label>
            <input name='valor_entrada' class="input_entrada"><br>
@@ -139,7 +139,7 @@ session_start();
     
     <button type='submit'>Salvar</button>
     <br><br><a href='pesquisaentrada.php'>Pesquisa</a>
-    <br><br><a href='graficosentrada.php'>Gerar gráficos</a>
+    <a href='graficosentrada.php'>Gerar gráficos</a>
 </form>
 <br>
 <br>

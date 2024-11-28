@@ -109,7 +109,7 @@ session_start();
         <div class="col-md-6">
         <div class="detail-box">
     
-    <h3>Cadastro de Gastos</h3>
+    <h3>Cadastro de Gastos</h3><br>
     <form method='POST' action='inserir.php'>   
     <label class="label_usuario">Valor: </label>
     <input name='valor_gasto' class="input_gasto"><br>
@@ -141,8 +141,8 @@ session_start();
     <br>
     
     <button type='submit'>Salvar</button>
-    <br><br><a href='pesquisa.php'>Pesquisa</a>
-    <br><br><a href='graficogastos.php'>Gerar gráficos</a>
+    <br><br><a href='pesquisa.php'>Pesquisa  </a>
+    <a href='graficogastos.php'>Gerar gráficos</a>
 </form>
 <br>
 <br>

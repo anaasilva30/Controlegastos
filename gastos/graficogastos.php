@@ -111,17 +111,50 @@ session_start();
             $dataNome = DateTime::createFromFormat('!m', $mes); // Cria o objeto DateTime
             $nome_mes = strftime('%B', $dataNome->getTimestamp()); // Retorna o mês por extenso
           }
+
+        $primeiroDiaDoMes = new DateTime("$ano-$mes-01");
+        $dataInicial = $primeiroDiaDoMes->format('Y-m-d');  // Formato: YYYY-MM-DD
+  
+        $ultimoDiaDoMes = new DateTime("$ano-$mes-31");
+        $dataFinal = $ultimoDiaDoMes->format('Y-m-d');  // Formato: YYYY-MM-DD
+
+          /* Conectando com o banco de dados para listar registros */
+          $datasource = 'mysql:host=localhost;dbname=controlegastos';
+          $user = 'root';
+          $pass = 'vertrigo';
+          $db = new PDO($datasource, $user, $pass);
+      
+          $query = "SELECT 
+                        SUM(valor_gasto) AS total
+                    FROM 
+                        gastos_usuario
+                    WHERE 
+                        data_gasto BETWEEN ? AND ?";
+          $stm = $db -> prepare($query);
+          $stm->bindParam(1, $dataInicial);
+          $stm->bindParam(2, $dataFinal);
+          $stm -> execute();
+        
+          if ($row = $stm->fetch()) {           
+              $valorTotal = $row['total'];
+              $valorTotal=str_replace('.',',',$valorTotal);
+          } else {
+            print '<p>Erro ao buscar total!</p>';
+            print_r ($stm->errorInfo());
+          }
         ?>
         <h2>
           Gráfico dos <span>Gastos</span> de <?php print "$nome_mes/$ano" ?>
         </h2>
+        
+        <br>
         <p>
-          Centralize suas despesas e recebimentos e facilite gestão financeira.
+          Selecione uma data para gerar os gráficos.
         </p>
         
       </div>
-      <form method="post" action="graficogastos.php">
-          <label>Mês: </label>
+      <form method="post" action="graficogastos.php" style="display: flex; justify-content: center; align-items: center; height: 5vh;">
+          <label>Mês: </label><br><br>
           <select name="mes">
               <option value="1">Janeiro</option>
               <option value="2">Fevereiro</option>
@@ -135,7 +168,7 @@ session_start();
               <option value="10">Outubro</option>
               <option value="11">Novembro</option>
               <option value="12">Dezembro</option>
-          </select>
+          </select><br>
           <label>Ano: </label>
           <select name="ano">
               <?php
@@ -149,13 +182,16 @@ session_start();
               }
               ?>
           </select>
-          <button type="submit">Gerar</button><br><br>
+            <br><button type="submit">Gerar</button><br><br>
         </form>
         <div class="graficoWrap">
         <div class="heading_container heading_center">          
-          <h2>
-            Setor <span> Gastos</span>
+          <br><br><h2>
+            Total de<span> Gastos</span>
           </h2>
+          <h4>
+          Total de Gastos no Mês <?php print "$valorTotal" ?>
+        </h4>
         </div>
         <section class="about_section layout_padding">
           <div class='grafBloco1'> <!-- inicio regiao graf 1 -->
@@ -168,6 +204,9 @@ session_start();
         let yCredito = [];
         let yPix = [];
         let yBoleto = [];
+        let yDebito = [];
+        let yTransferencia = [];
+        let yDinheiro = [];
 
       for (let i = 1; i <= 31; i++) {
           x.push(i);
@@ -175,21 +214,13 @@ session_start();
           yCredito.push(0);
           yPix.push(0);
           yBoleto.push(0);
+          yDebito.push(0);
+          yTransferencia.push(0);
+          yDinheiro.push(0);
+           
       }
-        <?php
-			
-      $primeiroDiaDoMes = new DateTime("$ano-$mes-01");
-      $dataInicial = $primeiroDiaDoMes->format('Y-m-d');  // Formato: YYYY-MM-DD
-  
-      $ultimoDiaDoMes = new DateTime("$ano-$mes-31");
-      $dataFinal = $ultimoDiaDoMes->format('Y-m-d');  // Formato: YYYY-MM-DD
+        <?php      
           				
-			/* Conectando com o banco de dados para listar registros */
-			$datasource = 'mysql:host=localhost;dbname=controlegastos';
-			$user = 'root';
-			$pass = 'vertrigo';
-			$db = new PDO($datasource, $user, $pass);
-	
 			$query = "SELECT 
                     *, DAY(data_gasto) AS dia
                 FROM 
@@ -226,7 +257,7 @@ session_start();
 
         // Layout do gráfico (título, labels dos eixos, etc.)
         var layout = {
-            title: 'Gastos do Mês',       // Título do gráfico
+            title: 'Gasto total',       // Título do gráfico
             xaxis: {
                 title: 'Dias'                        // Título do eixo X
             },
@@ -253,12 +284,12 @@ session_start();
         <div id="myPlot2" style="width:800px;"></div>
 <script>
     <?php
-      # Carregando gastos em crédito por dia
+      # Carregando gastos em pix por dia
       $query = "SELECT *, DAY(data_gasto) AS dia
                   FROM 
                   gastos_usuario
                   WHERE 
-                  data_gasto BETWEEN ? AND ? AND tipo_gasto = 'CRÉDITO'";
+                  data_gasto BETWEEN ? AND ? AND tipo_gasto = 'PIX'";
       $stm = $db -> prepare($query);
       $stm->bindParam(1, $dataInicial);
       $stm->bindParam(2, $dataFinal);
@@ -269,7 +300,7 @@ session_start();
         $valor = $row['valor_gasto'];
         $dia = $row['dia'];	
 
-        print "yCredito[$dia] = $valor;";
+        print "yPix[$dia] = $valor;";
       }				
       } else {
         print '<p>Erro ao listar registros!</p>';
@@ -282,7 +313,7 @@ session_start();
       FROM 
       gastos_usuario
       WHERE 
-      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'PIX'";
+      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'CRÉDITO'";
       $stm = $db -> prepare($query);
       $stm->bindParam(1, $dataInicial);
       $stm->bindParam(2, $dataFinal);
@@ -294,7 +325,32 @@ session_start();
       $valor = $row['valor_gasto'];
       $dia = $row['dia'];	
 
-      print "yPix[$dia] = $valor;";
+      print "yCredito[$dia] = $valor;";
+      }				
+      } else {
+      print '<p>Erro ao listar registros!</p>';
+      print_r ($stm->errorInfo());
+      }
+
+      # Carregando gastos em débito por dia
+      $query = "SELECT 
+      *, DAY(data_gasto) AS dia
+      FROM 
+      gastos_usuario
+      WHERE 
+      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'DÉBITO'";
+      $stm = $db -> prepare($query);
+      $stm->bindParam(1, $dataInicial);
+      $stm->bindParam(2, $dataFinal);
+
+
+      if ($stm -> execute()) {
+      $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+      foreach($result as $row) {
+      $valor = $row['valor_gasto'];
+      $dia = $row['dia'];	
+
+      print "yDebito[$dia] = $valor;";
       }				
       } else {
       print '<p>Erro ao listar registros!</p>';
@@ -325,6 +381,56 @@ session_start();
       print '<p>Erro ao listar registros!</p>';
       print_r ($stm->errorInfo());
       }
+
+      # Carregando gastos em transferência por dia
+      $query = "SELECT 
+      *, DAY(data_gasto) AS dia
+      FROM 
+      gastos_usuario
+      WHERE 
+      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'TRANSFERÊNCIA'";
+      $stm = $db -> prepare($query);
+      $stm->bindParam(1, $dataInicial);
+      $stm->bindParam(2, $dataFinal);
+
+
+      if ($stm -> execute()) {
+      $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+      foreach($result as $row) {
+      $valor = $row['valor_gasto'];
+      $dia = $row['dia'];	
+
+      print "yTransferencia[$dia] = $valor;";
+      }				
+      } else {
+      print '<p>Erro ao listar registros!</p>';
+      print_r ($stm->errorInfo());
+      }
+
+      # Carregando gastos em boleto por dia
+      $query = "SELECT 
+      *, DAY(data_gasto) AS dia
+      FROM 
+      gastos_usuario
+      WHERE 
+      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'DINHEIRO'";
+      $stm = $db -> prepare($query);
+      $stm->bindParam(1, $dataInicial);
+      $stm->bindParam(2, $dataFinal);
+
+
+      if ($stm -> execute()) {
+      $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+      foreach($result as $row) {
+      $valor = $row['valor_gasto'];
+      $dia = $row['dia'];	
+
+      print "yDinheiro[$dia] = $valor;";
+      }				
+      } else {
+      print '<p>Erro ao listar registros!</p>';
+      print_r ($stm->errorInfo());
+      }
     ?>
 
 
@@ -346,21 +452,43 @@ var dados2 = [
     },
     {
         x: x, // Eixo X (Mês)
+        y: yDebito, // Eixo Y (Lucros)
+        type: 'scatter', // Tipo de gráfico (scatter = gráfico de linhas)
+        mode: 'lines+markers', // Mostrar linhas e marcadores (pontos)
+        name: 'Débito' // Nome da série
+    },
+    {
+        x: x, // Eixo X (Mês)
         y: yBoleto, // Eixo Y (Lucros)
         type: 'scatter', // Tipo de gráfico (scatter = gráfico de linhas)
         mode: 'lines+markers', // Mostrar linhas e marcadores (pontos)
         name: 'Boleto' // Nome da série
+    },
+    {
+        x: x, // Eixo X (Mês)
+        y: yTransferencia, // Eixo Y (Lucros)
+        type: 'scatter', // Tipo de gráfico (scatter = gráfico de linhas)
+        mode: 'lines+markers', // Mostrar linhas e marcadores (pontos)
+        name: 'Transferência' // Nome da série
+    },
+    {
+        x: x, // Eixo X (Mês)
+        y: yDinheiro, // Eixo Y (Lucros)
+        type: 'scatter', // Tipo de gráfico (scatter = gráfico de linhas)
+        mode: 'lines+markers', // Mostrar linhas e marcadores (pontos)
+        name: 'Dinheiro' // Nome da série
     }
+
 ];
 
 // Layout do gráfico (título, labels dos eixos, etc.)
 var layout2 = {
-    title: 'Análise de Gastos, Vendas e Lucros', // Título do gráfico
+    title: 'Tipos de gastos', // Título do gráfico
     xaxis: {
-        title: 'Meses' // Título do eixo X
+        title: 'Dias' // Título do eixo X
     },
     yaxis: {
-        title: 'Valores' // Título do eixo Y
+        title: 'Tipo' // Título do eixo Y
     }
 };
 
@@ -369,6 +497,55 @@ Plotly.newPlot('myPlot2', dados2, layout2);
 
 </script>
 </div><!-- fim regiao graf 2 -->
+
+<div class='tabelaBloco'>
+
+<?php
+  # pix
+    $query = "SELECT 
+    SUM(valor_gasto) AS total
+    FROM 
+    gastos_usuario
+    WHERE 
+    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'PIX'";
+    $stm = $db -> prepare($query);
+    $stm->bindParam(1, $dataInicial);
+    $stm->bindParam(2, $dataFinal);
+    $stm -> execute();
+    
+    if ($row = $stm->fetch()) {           
+      $totalPix = $row['total'] == ""? 0: $row['total'];
+      $totalPix=str_replace('.',',',$totalPix);
+    } else {
+      print '<p>Erro ao buscar total!</p>';
+      print_r ($stm->errorInfo());
+    }
+
+  # débito
+    $query = "SELECT 
+    SUM(valor_gasto) AS total
+    FROM 
+    gastos_usuario
+    WHERE 
+    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'DÉBITO'";
+    $stm = $db -> prepare($query);
+    $stm->bindParam(1, $dataInicial);
+    $stm->bindParam(2, $dataFinal);
+    $stm -> execute();
+    
+    if ($row = $stm->fetch()) {           
+      $totalDebito =  $row['total'] == ""? 0: $row['total'];
+      $totalDebito=str_replace('.',',',$totalDebito);
+    } else {
+      print '<p>Erro ao buscar total!</p>';
+      print_r ($stm->errorInfo());
+    }
+?>
+
+<?php print "<p>Pix: $totalPix</p>"; ?>
+<?php print "<p>Débito: $totalDebito</p>"; ?>
+
+</div>
       </div>
   </section>
 
