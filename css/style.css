@@ -1000,7 +1000,16 @@ td, th{
 .graficoWrap{
   width: 870px; /* faz com que as divs ocupem o mesmo espaço */
   margin: 10px auto; /* espaço entre as divs */
-  height: 1300px; /* altura fixa */
+  height: 1500px; /* altura fixa */
+  /*width: 1px;*/
+  /*border:1px solid black;  */
+  
+}
+
+.graficoWrap2{
+  width: 870px; /* faz com que as divs ocupem o mesmo espaço */
+  margin: 10px auto; /* espaço entre as divs */
+  height: 1200px; /* altura fixa */
   /*width: 1px;*/
   /*border:1px solid black;  */
   
@@ -1012,14 +1021,16 @@ td, th{
   /*border:1px solid black;*/
   float: left;
   display:inline;
-  margin-top: -90px;
-  margin-left: 20px;
+  
+  margin-left: 20px; 
+  margin-top: -10px; 
 }
 
 .containerBarra{
   width: 400px;
   float: left;
   display: inline;
+  margin-top: 80px;
 }
 
 .foto_perfil {
@@ -1030,3 +1041,18 @@ td, th{
   display: block;
   margin: 20px auto;
 }
+
+.grafBloco1{
+  border: 1px solid black;
+  width: 870px;
+  min-height: 400px;
+}
+
+.grafBloco2{
+  border: 1px solid black;
+  width: 870px;
+  min-height: 400px;
+  margin-top: 60px;
+  clear: both;
+}
+

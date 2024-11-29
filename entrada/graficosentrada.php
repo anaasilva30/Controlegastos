@@ -94,6 +94,42 @@ session_start();
   <section class="about_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
+      <?php
+      $data1 = '';
+			$data2 = '';
+			if (isset($_POST['data1'])){
+				$data1 = $_POST['data1'];
+			}
+			if (isset($_POST['data2'])){
+				$data2 = $_POST['data2'];
+			}
+				
+			/* Conectando com o banco de dados para listar registros */
+			$datasource = 'mysql:host=localhost;dbname=controlegastos';
+			$user = 'root';
+			$pass = 'vertrigo';
+			$db = new PDO($datasource, $user, $pass);
+
+        $query = "SELECT 
+                        SUM(valor_entrada) AS total
+                    FROM 
+                        entrada_usuario
+                    WHERE 
+                        data_entrada BETWEEN ? AND ?";
+          $stm = $db -> prepare($query);
+          $stm->bindParam(1, $dataInicial);
+          $stm->bindParam(2, $dataFinal);
+          $stm -> execute();
+        
+          if ($row = $stm->fetch()) {           
+              $valorTotal = $row['total'];
+              $valorTotal=str_replace('.',',',$valorTotal);
+          } else {
+            print '<p>Erro ao buscar total!</p>';
+            print_r ($stm->errorInfo());
+          } 
+        ?>
+
         <h2>
           Gráfico dos <span>recebimentos</span>
         </h2>
@@ -109,14 +145,20 @@ session_start();
           <input type="date" name="data2" /><br><br>
           <button type="submit">Gerar</button><br><br>
         </form>
-        <div class="graficoWrap">
-        <div class="heading_container heading_center">          
-          <br><br><h2>
-            Setores de<span> entrada</span>
-          </h2>
+
+       
+        <div class="graficoWrap2">
+        <div class="heading_container heading_center">
+          <h4>
+            Total de Entrada no Período de <?php print "$data1 a $data2" ?>
+          </h4>          
+          
         </div>
         <section class="about_section layout_padding">
           <div class='grafBloco1'>
+          <h2 align="center">
+            Setores de<span> entrada</span>
+          </h2>
     <div class="containerBarra">
       
 
@@ -131,20 +173,7 @@ session_start();
             outro: 0
           }
         <?php
-			$data1 = '';
-			$data2 = '';
-			if (isset($_POST['data1'])){
-				$data1 = $_POST['data1'];
-			}
-			if (isset($_POST['data2'])){
-				$data2 = $_POST['data2'];
-			}
-				
-			/* Conectando com o banco de dados para listar registros */
-			$datasource = 'mysql:host=localhost;dbname=controlegastos';
-			$user = 'root';
-			$pass = 'vertrigo';
-			$db = new PDO($datasource, $user, $pass);
+			
 	
 			$query = "SELECT 
                     setor_entrada,
@@ -239,22 +268,25 @@ session_start();
     </script>
     </div>
        
-    </div>
+    </div><br>
     
-   
+    
 
     <div class='grafBloco2'>
+    <h2 align='center'>
+            Tipos de<span> entrada</span>
+          </h2>
     <div class="containerBarra">
-      
+       
       <canvas id="graficoEntrada2" width="500" height="400"></canvas> 
       <script>
-        var setor_val = {
-          fixo: 0,
-          freelancer: 0,
-          extra: 0, 
-          presente: 0, 
-          auxilio: 0,
-          outro: 0
+        var tipo_val = {
+          pix: 0,
+          credito: 0,
+          debito: 0, 
+          boleto: 0, 
+          transferencia: 0,
+          dinheiro: 0
         }
       <?php
     
@@ -266,16 +298,16 @@ session_start();
     $db = new PDO($datasource, $user, $pass);
 
     $query = "SELECT 
-                  setor_entrada,
+                  tipo_entrada,
                   SUM(valor_entrada) AS total_valor
               FROM 
                   entrada_usuario
               WHERE 
                   data_entrada BETWEEN ? AND ?
               GROUP BY 
-                  setor_entrada
+                  tipo_entrada
               ORDER BY 
-                  FIELD(setor_entrada, 'TRABALHO FIXO', 'FREELANCER', 'EXTRA', 'PRESENTE', 'AUXILIO', 'OUTRO');
+                  FIELD(tipo_entrada, 'PIX', 'CRÉDITO', 'DÉBITO', 'BOLETO', 'TRANSFERÊNCIA', 'DINHEIRO');
               ";
     $stm = $db -> prepare($query);
     $stm->bindParam(1, $data1);
@@ -284,26 +316,26 @@ session_start();
     if ($stm -> execute()) {
       $result = $stm->fetchAll(PDO::FETCH_ASSOC);
       foreach($result as $row) {
-        $setor = $row['setor_entrada'];
+        $tipo = $row['tipo_entrada'];
         $total_valor = $row['total_valor'];	
         
-        if ($setor == "TRABALHO FIXO"){
-          print "setor_val.fixo=$total_valor;";
+        if ($tipo == "PIX"){
+          print "tipo_val.pix=$total_valor;";
         }
-        else if ($setor == "FREELANCER"){
-          print "setor_val.freelancer=$total_valor;";
+        else if ($tipo == "CRÉDITO"){
+          print "tipo_val.credito=$total_valor;";
         }
-        else if ($setor == "EXTRA"){
-          print "setor_val.extra=$total_valor;";
+        else if ($tipo == "DÉBITO"){
+          print "tipo_val.debito=$total_valor;";
         }		
-        else if ($setor == "PRESENTE"){
-          print "setor_val.presente=$total_valor;";
+        else if ($tipo == "BOLETO"){
+          print "tipo_val.boleto=$total_valor;";
         }	
-        else if ($setor == "AUXÍLIO"){
-          print "setor_val.auxilio=$total_valor;";
+        else if ($tipo == "TRANSFERÊNCIA"){
+          print "tipo_val.transferencia=$total_valor;";
         }
-        else if ($setor == "OUTRO"){
-          print "setor_val.outro=$total_valor;";
+        else if ($tipo == "DINHEIRO"){
+          print "tipo_val.dinheiro=$total_valor;";
         }
       }				
     } else {
@@ -313,22 +345,22 @@ session_start();
 ?>
  
     
-      const contexto = document.getElementById('graficoEntrada2').getContext('2d');
-      const setores = ['Trabalho fixo', 'Freelancer', 'Extra', 'Auxílio', 'Presente', 'Outro']; // setores de entrada
-      const valores = [setor_val.fixo, setor_val.freelancer, setor_val.extra, setor_val.auxilio, setor_val.presente, setor_val.outro]; // valores entrada correspondentes
+      const contexto2 = document.getElementById('graficoEntrada2').getContext('2d');
+      const tipo2 = ['Pix', 'Crédito', 'Débito', 'Boleto', 'Transferência', 'Dinheiro']; // setores de entrada
+      const valores2 = [tipo_val.pix, tipo_val.credito, tipo_val.debito, tipo_val.boleto, tipo_val.transferencia, tipo_val.dinheiro]; // valores entrada correspondentes
 
-      const dados = {
-          labels: setores,
+      const dados2 = {
+          labels: tipo2,
           datasets: [{
               label: 'Valor recebido por Setor',
-              data: valores,
+              data: valores2,
               backgroundColor: 'rgba(54, 162, 235, 0.2)',
               borderColor: 'rgba(54, 162, 235, 1)',
               borderWidth: 1
           }]
       };
 
-      const opcoes = {
+      const opcoes2 = {
           scales: {
               y: {
                   beginAtZero: true
@@ -336,10 +368,10 @@ session_start();
           }
       };
 
-      const graficoEntrada = new Chart(contexto, {
+      const graficoEntrada2 = new Chart(contexto2, {
           type: 'bar',
-          data: dados,
-          options: opcoes
+          data: dados2,
+          options: opcoes2
       });
       
   </script>
@@ -348,13 +380,13 @@ session_start();
   <div id="myPlot2" style="width:400px;"></div>
 
   <script>
-    const xArray = ['Trabalho fixo', 'Freelancer', 'Extra', 'Auxílio', 'Presente', 'Outro']; // setores de entrada
+    const xArray2 = ['Pix', 'Crédito', 'Débito', 'Boleto', 'Transferência', 'Dinheiro']; // setores de entrada
 
-    const yArray = [setor_val.fixo, setor_val.freelancer, setor_val.extra, setor_val.auxilio, setor_val.presente, setor_val.outro];
+    const yArray2 = [tipo_val.pix, tipo_val.credito, tipo_val.debito, tipo_val.boleto, tipo_val.transferencia, tipo_val.dinheiro];
 
-    const data = [{labels:xArray, values:yArray, type:"pie"}];
+    const data2 = [{labels:xArray2, values:yArray2, type:"pie"}];
 
-    Plotly.newPlot("myPlot2", data);
+    Plotly.newPlot("myPlot2", data2);
   </script>
   </div>
      

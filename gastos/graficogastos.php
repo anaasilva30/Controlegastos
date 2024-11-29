@@ -2,15 +2,14 @@
 // Inicia a sessao.
 session_start();
 
-
-			$mes = '';
-			$ano = '';
-			if (isset($_POST['mes'])){
-				$mes = $_POST['mes'];
-			}
-			if (isset($_POST['ano'])){
-				$ano = $_POST['ano'];
-			}
+$mes = date("m");
+$ano = date("Y");
+if (isset($_POST['mes'])){
+  $mes = $_POST['mes'];
+}
+if (isset($_POST['ano'])){
+  $ano = $_POST['ano'];
+}
 
 ?>
 
@@ -407,7 +406,7 @@ session_start();
       print_r ($stm->errorInfo());
       }
 
-      # Carregando gastos em boleto por dia
+      # Carregando gastos em dinheiro por dia
       $query = "SELECT 
       *, DAY(data_gasto) AS dia
       FROM 
