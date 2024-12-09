@@ -137,6 +137,8 @@ if ($stm -> execute()) {
           <input type="file" name="foto_perfil" />
           <button type='button' onclick="window.open('perfil.php', '_self')">Cancelar</button> 
           <button type='submit'>Atualizar</button>
+        
+          
 </form>
 <br>
 </div>

@@ -89,19 +89,20 @@ session_start();
   <section class="about_section layout_padding">
     <div class="container  ">
       <div class="heading_container heading_center">
-      <?php
-            if(isset($_GET['cadastro'])){
-            ?>
-                <span style='color:green; border: 1px solid black; padding: 5px;border-radius:3px; margin-bottom: 10px;'>Cadastro Efetuado! <i class="fa fa-solid fa-exclamation-triangle" aria-hidden="true"></i></span>
-            <?php            
-            }
-        ?>
+      
         <h2>
           Preencha seus dados e venha fazer parte do<span>SaldoPrático</span>
         </h2>
         <p>
           Centralize suas despesas e recebimentos e facilite gestão financeira.
-        </p>
+        </p><br>
+        <?php
+            if(isset($_GET['msg']) && $_GET['msg'] == "erro"){
+            ?>
+                <span style='color:red; border: 1px solid black; padding: 5px;border-radius:3px; margin-bottom: 10px;'>Usuário e senha inválido!<i class="fa fa-solid fa-exclamation-triangle" aria-hidden="true"></i></span>
+            <?php            
+            }
+        ?>
       </div>
       <div class="row">
         <div class="col-md-6 ">

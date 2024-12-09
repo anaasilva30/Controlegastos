@@ -63,7 +63,7 @@
 		echo "<script>alert('$mensagem1');</script>";
 		echo "<a href='indexg.php'>Login</a><br><br>"; 
 		echo "<a href='index.php'>Voltar</a>";*/
-		$url = "location: indexg.php?cadastro=true";
+		$url = "location: perfil.php?cadastro=true";
 	}
 	else {
 		/*$mensagem2 = "Erro ao cadastrar usuário!";

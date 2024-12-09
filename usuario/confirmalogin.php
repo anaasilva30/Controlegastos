@@ -6,8 +6,6 @@ session_start();
 $cpf_usuario = $_POST['cpf_usuario'];
 $senha_usuario = $_POST['senha_usuario'];
 
-print "--$cpf_usuario | senha: $senha_usuario";
-
 /* Conectando com o banco de dados para cadastrar registros */
 $datasource = 'mysql:host=localhost;dbname=controlegastos';
 $user = 'root';
@@ -28,13 +26,10 @@ if ($row = $stm -> fetch()) {
 	$_SESSION['nome_usuario'] = $row['nome_usuario'];
 	
 	// Redirecionando para a página inicial.
-	header("location:../gastos/index.php");
+	$url = "location:../gastos/index.php";
 } else {
-	// Caso usuário ou senha estejam incorretos.
-	
-    function loginerrado(){
-       alert('Usuário e/ou Senha Inválidos!');
-       print "<a href='indexg.html'>Voltar</a>";
-    }
+	$url = "location:indexg.php?msg=erro";
 }
+
+header($url);
 ?>
