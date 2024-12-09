@@ -1023,7 +1023,12 @@ td, th{
   display:inline;
   
   margin-left: 20px; 
-  margin-top: -10px; 
+  margin-top: -10px;   
+  overflow: hidden;
+}
+
+.pizzaGraf{
+  margin-top: -40px;
 }
 
 .containerBarra{
@@ -1045,14 +1050,20 @@ td, th{
 .grafBloco1{
   border: 1px solid black;
   width: 870px;
-  min-height: 400px;
+  min-height: 480px;
 }
 
 .grafBloco2{
   border: 1px solid black;
   width: 870px;
-  min-height: 400px;
+  min-height: 480px;
   margin-top: 60px;
   clear: both;
 }
 
+.wrapGraf{
+  width: 300px;
+  height: 400px;
+  border: 1px solid black;
+  overflow: hidden;
+}

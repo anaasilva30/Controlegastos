@@ -187,7 +187,7 @@ if (isset($_POST['ano'])){
         <div class="heading_container heading_center">          
           <br><br><h2>
             Total de<span> Gastos</span>
-          </h2>
+          </h2><br>
           <h4>
           Total de Gastos no Mês <?php print "$valorTotal" ?>
         </h4>
@@ -195,8 +195,9 @@ if (isset($_POST['ano'])){
         <section class="about_section layout_padding">
           <div class='grafBloco1'> <!-- inicio regiao graf 1 -->
    
-      
+          
     <div id="myPlot" style="width:800px;"></div>
+          
         <script>
         let x = [];
         let y = [];
@@ -520,7 +521,27 @@ Plotly.newPlot('myPlot2', dados2, layout2);
       print_r ($stm->errorInfo());
     }
 
-  # débito
+  # crédito
+    $query = "SELECT 
+    SUM(valor_gasto) AS total
+    FROM 
+    gastos_usuario
+    WHERE 
+    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'CRÉDITO'";
+    $stm = $db -> prepare($query);
+    $stm->bindParam(1, $dataInicial);
+    $stm->bindParam(2, $dataFinal);
+    $stm -> execute();
+    
+    if ($row = $stm->fetch()) {           
+      $totalCredito =  $row['total'] == ""? 0: $row['total'];
+      $totalCredito=str_replace('.',',',$totalCredito);
+    } else {
+      print '<p>Erro ao buscar total!</p>';
+      print_r ($stm->errorInfo());
+    }
+    
+    # débito
     $query = "SELECT 
     SUM(valor_gasto) AS total
     FROM 
@@ -539,10 +560,84 @@ Plotly.newPlot('myPlot2', dados2, layout2);
       print '<p>Erro ao buscar total!</p>';
       print_r ($stm->errorInfo());
     }
-?>
 
-<?php print "<p>Pix: $totalPix</p>"; ?>
-<?php print "<p>Débito: $totalDebito</p>"; ?>
+    # boleto
+    $query = "SELECT 
+    SUM(valor_gasto) AS total
+    FROM 
+    gastos_usuario
+    WHERE 
+    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'BOLETO'";
+    $stm = $db -> prepare($query);
+    $stm->bindParam(1, $dataInicial);
+    $stm->bindParam(2, $dataFinal);
+    $stm -> execute();
+    
+    if ($row = $stm->fetch()) {           
+      $totalBoleto =  $row['total'] == ""? 0: $row['total'];
+      $totalBoleto=str_replace('.',',',$totalBoleto);
+    } else {
+      print '<p>Erro ao buscar total!</p>';
+      print_r ($stm->errorInfo());
+    }
+
+    # transferência
+    $query = "SELECT 
+    SUM(valor_gasto) AS total
+    FROM 
+    gastos_usuario
+    WHERE 
+    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'TRANSFERÊNCIA'";
+    $stm = $db -> prepare($query);
+    $stm->bindParam(1, $dataInicial);
+    $stm->bindParam(2, $dataFinal);
+    $stm -> execute();
+    
+    if ($row = $stm->fetch()) {           
+      $totalTransferencia =  $row['total'] == ""? 0: $row['total'];
+      $totalTransferencia=str_replace('.',',',$totalTransferencia);
+    } else {
+      print '<p>Erro ao buscar total!</p>';
+      print_r ($stm->errorInfo());
+    }
+
+     # dinheiro
+     $query = "SELECT 
+     SUM(valor_gasto) AS total
+     FROM 
+     gastos_usuario
+     WHERE 
+     data_gasto BETWEEN ? AND ? AND tipo_gasto = 'DINHEIRO'";
+     $stm = $db -> prepare($query);
+     $stm->bindParam(1, $dataInicial);
+     $stm->bindParam(2, $dataFinal);
+     $stm -> execute();
+     
+     if ($row = $stm->fetch()) {           
+       $totalDinheiro =  $row['total'] == ""? 0: $row['total'];
+       $totalDinheiro=str_replace('.',',',$totalDinheiro);
+     } else {
+       print '<p>Erro ao buscar total!</p>';
+       print_r ($stm->errorInfo());
+     }
+?><br><br>
+<?php // Início da tabela
+echo "<table border='1' cellspacing='0' cellpadding='5'>";
+
+// Cabeçalho da tabela
+echo "<tr><th>Tipo de Pagamento</th><th>Total</th></tr>";
+
+// Dados
+echo "<tr><td>Pix</td><td>$totalPix</td></tr>";
+echo "<tr><td>Crédito</td><td>$totalCredito</td></tr>";
+echo "<tr><td>Débito</td><td>$totalDebito</td></tr>";
+echo "<tr><td>Boleto</td><td>$totalBoleto</td></tr>";
+echo "<tr><td>Transferência</td><td>$totalTransferencia</td></tr>";
+echo "<tr><td>Dinheiro</td><td>$totalDinheiro</td></tr>";
+
+// Fim da tabela
+echo "</table>";
+?><br><br>
 
 </div>
       </div>

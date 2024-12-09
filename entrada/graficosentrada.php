@@ -148,7 +148,7 @@ session_start();
 
        
         <div class="graficoWrap2">
-        <div class="heading_container heading_center">
+        <div class="heading_container heading_center"><br>
           <h4>
             Total de Entrada no Período de <?php print "$data1 a $data2" ?>
           </h4>          
@@ -255,7 +255,8 @@ session_start();
     </script>
     </div>
     <div class="graficopizza">
-    <div id="myPlot" style="width:400px;"></div>
+
+    <div id="myPlot" class="pizzaGraf" style="width:400px;"></div>
 
     <script>
       const xArray = ['Trabalho fixo', 'Freelancer', 'Extra', 'Auxílio', 'Presente', 'Outro']; // setores de entrada
@@ -377,7 +378,7 @@ session_start();
   </script>
   </div>
   <div class="graficopizza">
-  <div id="myPlot2" style="width:400px;"></div>
+  <div id="myPlot2" class="pizzaGraf" style="width:400px;"></div>
 
   <script>
     const xArray2 = ['Pix', 'Crédito', 'Débito', 'Boleto', 'Transferência', 'Dinheiro']; // setores de entrada
