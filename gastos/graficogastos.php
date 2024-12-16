@@ -228,10 +228,11 @@ if (isset($_POST['ano'])){
                 FROM 
                     gastos_usuario
                 WHERE 
-                    data_gasto BETWEEN ? AND ?";
+                    data_gasto BETWEEN ? AND ? AND cpf_usuario=?";
 			$stm = $db -> prepare($query);
 			$stm->bindParam(1, $dataInicial);
 			$stm->bindParam(2, $dataFinal);
+      $stm->bindParam(3, $cpf);
 		
 			if ($stm -> execute()) {
 				$result = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -291,10 +292,11 @@ if (isset($_POST['ano'])){
                   FROM 
                   gastos_usuario
                   WHERE 
-                  data_gasto BETWEEN ? AND ? AND tipo_gasto = 'PIX'";
+                  data_gasto BETWEEN ? AND ? AND tipo_gasto = 'PIX' AND cpf_usuario=?";
       $stm = $db -> prepare($query);
       $stm->bindParam(1, $dataInicial);
       $stm->bindParam(2, $dataFinal);
+      $stm->bindParam(3, $cpf);
 
       if ($stm -> execute()) {
       $result = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -315,10 +317,11 @@ if (isset($_POST['ano'])){
       FROM 
       gastos_usuario
       WHERE 
-      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'CRÉDITO'";
+      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'CRÉDITO' AND cpf_usuario=?";
       $stm = $db -> prepare($query);
       $stm->bindParam(1, $dataInicial);
       $stm->bindParam(2, $dataFinal);
+      $stm->bindParam(3, $cpf);
 
 
       if ($stm -> execute()) {
@@ -340,11 +343,11 @@ if (isset($_POST['ano'])){
       FROM 
       gastos_usuario
       WHERE 
-      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'DÉBITO'";
+      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'DÉBITO' AND cpf_usuario=?";
       $stm = $db -> prepare($query);
       $stm->bindParam(1, $dataInicial);
       $stm->bindParam(2, $dataFinal);
-
+      $stm->bindParam(3, $cpf);
 
       if ($stm -> execute()) {
       $result = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -365,10 +368,12 @@ if (isset($_POST['ano'])){
       FROM 
       gastos_usuario
       WHERE 
-      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'BOLETO'";
+      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'BOLETO' AND cpf_usuario=?";
       $stm = $db -> prepare($query);
       $stm->bindParam(1, $dataInicial);
       $stm->bindParam(2, $dataFinal);
+      $stm->bindParam(3, $cpf);
+
 
 
       if ($stm -> execute()) {
@@ -390,10 +395,11 @@ if (isset($_POST['ano'])){
       FROM 
       gastos_usuario
       WHERE 
-      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'TRANSFERÊNCIA'";
+      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'TRANSFERÊNCIA' AND cpf_usuario=?";
       $stm = $db -> prepare($query);
       $stm->bindParam(1, $dataInicial);
       $stm->bindParam(2, $dataFinal);
+      $stm->bindParam(3, $cpf);
 
 
       if ($stm -> execute()) {
@@ -415,11 +421,12 @@ if (isset($_POST['ano'])){
       FROM 
       gastos_usuario
       WHERE 
-      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'DINHEIRO'";
+      data_gasto BETWEEN ? AND ? AND tipo_gasto = 'DINHEIRO'AND cpf_usuario=?";
+      $stm = $db -> prepare($query);
       $stm = $db -> prepare($query);
       $stm->bindParam(1, $dataInicial);
       $stm->bindParam(2, $dataFinal);
-
+      $stm->bindParam(3, $cpf);
 
       if ($stm -> execute()) {
       $result = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -509,10 +516,11 @@ Plotly.newPlot('myPlot2', dados2, layout2);
     FROM 
     gastos_usuario
     WHERE 
-    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'PIX'";
+    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'PIX' AND cpf_usuario=?";
     $stm = $db -> prepare($query);
     $stm->bindParam(1, $dataInicial);
     $stm->bindParam(2, $dataFinal);
+    $stm->bindParam(3, $cpf);
     $stm -> execute();
     
     if ($row = $stm->fetch()) {           
@@ -529,10 +537,11 @@ Plotly.newPlot('myPlot2', dados2, layout2);
     FROM 
     gastos_usuario
     WHERE 
-    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'CRÉDITO'";
+    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'CRÉDITO' AND cpf_usuario=?";
     $stm = $db -> prepare($query);
     $stm->bindParam(1, $dataInicial);
     $stm->bindParam(2, $dataFinal);
+    $stm->bindParam(3, $cpf);
     $stm -> execute();
     
     if ($row = $stm->fetch()) {           
@@ -549,10 +558,11 @@ Plotly.newPlot('myPlot2', dados2, layout2);
     FROM 
     gastos_usuario
     WHERE 
-    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'DÉBITO'";
+    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'DÉBITO' AND cpf_usuario=?";
     $stm = $db -> prepare($query);
     $stm->bindParam(1, $dataInicial);
     $stm->bindParam(2, $dataFinal);
+    $stm->bindParam(3, $cpf);
     $stm -> execute();
     
     if ($row = $stm->fetch()) {           
@@ -569,10 +579,11 @@ Plotly.newPlot('myPlot2', dados2, layout2);
     FROM 
     gastos_usuario
     WHERE 
-    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'BOLETO'";
+    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'BOLETO' AND cpf_usuario=?";
     $stm = $db -> prepare($query);
     $stm->bindParam(1, $dataInicial);
     $stm->bindParam(2, $dataFinal);
+    $stm->bindParam(3, $cpf);
     $stm -> execute();
     
     if ($row = $stm->fetch()) {           
@@ -589,10 +600,11 @@ Plotly.newPlot('myPlot2', dados2, layout2);
     FROM 
     gastos_usuario
     WHERE 
-    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'TRANSFERÊNCIA'";
+    data_gasto BETWEEN ? AND ? AND tipo_gasto = 'TRANSFERÊNCIA' AND cpf_usuario=?";
     $stm = $db -> prepare($query);
     $stm->bindParam(1, $dataInicial);
     $stm->bindParam(2, $dataFinal);
+    $stm->bindParam(3, $cpf);
     $stm -> execute();
     
     if ($row = $stm->fetch()) {           
@@ -609,10 +621,10 @@ Plotly.newPlot('myPlot2', dados2, layout2);
      FROM 
      gastos_usuario
      WHERE 
-     data_gasto BETWEEN ? AND ? AND tipo_gasto = 'DINHEIRO'";
-     $stm = $db -> prepare($query);
+     data_gasto BETWEEN ? AND ? AND tipo_gasto = 'DINHEIRO' AND cpf_usuario=?";
      $stm->bindParam(1, $dataInicial);
      $stm->bindParam(2, $dataFinal);
+     $stm->bindParam(3, $cpf);
      $stm -> execute();
      
      if ($row = $stm->fetch()) {           
