@@ -1,6 +1,7 @@
 <?php
 // Inicia a sessao.
 session_start();
+$cpf = $_SESSION['cpf_usuario'];
 
 $mes = date("m");
 $ano = date("Y");
@@ -128,10 +129,11 @@ if (isset($_POST['ano'])){
                     FROM 
                         gastos_usuario
                     WHERE 
-                        data_gasto BETWEEN ? AND ?";
+                        data_gasto BETWEEN ? AND ? AND cpf_usuario=?";
           $stm = $db -> prepare($query);
           $stm->bindParam(1, $dataInicial);
           $stm->bindParam(2, $dataFinal);
+          $stm->bindParam(3, $cpf);
           $stm -> execute();
         
           if ($row = $stm->fetch()) {           
