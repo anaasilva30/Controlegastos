@@ -26,7 +26,7 @@ if ($row = $stm -> fetch()) {
 	$_SESSION['nome_usuario'] = $row['nome_usuario'];
 	
 	// Redirecionando para a página inicial.
-	$url = "location:../gastos/index.php";
+	$url = "location:../usuario/perfil.php";
 } else {
 	$url = "location:indexg.php?msg=erro";
 }

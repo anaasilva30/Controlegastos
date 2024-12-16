@@ -117,20 +117,17 @@ if ($stm -> execute()) {
         </nav>
       </div>
     </header>
-   
-
   <section class="about_section layout_padding">
     <div class="container  ">
       <div class="heading_container heading_center">
       <img src="imagens/<?php echo htmlspecialchars($foto_perfil); ?>" class="foto_perfil" alt="Foto de Perfil">
         <h2>
-          Perfil do <span>Usuário</span>
+        <span><?php echo $nome_usuario; ?></span>
         </h2>
         <p>
          Estamos felizes em te-lô conosco!
         </p>
       </div>
-   
       <div class="container  ">
       <div class="heading_container heading_center">
             <form method="post" action="salva.php">
@@ -141,13 +138,13 @@ if ($stm -> execute()) {
             <label class="label_usuario">Telefone: </label>
             <input name='telefone_usuario'value='<?php print $telefone_usuario ?>' readonly><br>
             <label class="label_usuario">E-mail: </label>
-            <input name='email_usuario' value='<?php print $email_usuario ?>' readonly><br><br>
+            <input name='email_usuario' value='<?php print $email_usuario ?>' readonly><br>
             <a href='edita.php'>Editar</a>
         </form>
           </div>
         </div>
       </div>
-    </div><br>
+    </div>
   </section>
 
   <!-- end about section -->

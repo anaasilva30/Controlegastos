@@ -119,12 +119,9 @@ if ($stm -> execute()) {
         </div>
         <div class="col-md-6">
           <div class="detail-box">
-            
-        <h3>Editar cadastro de usuário</h3><br>
+
         <div class="edita">
         <form method='POST' action='atualiza.php' enctype='multipart/form-data'>
-          <label>CPF: </label>
-          <input name='cpf_usuario' value='<?php print $cpf_usuario ?>' readonly><br>
           <label>Nome: </label>
           <input name='nome_usuario' value='<?php print $nome_usuario ?>'><br>
           <label>Telefone: </label>
@@ -132,8 +129,8 @@ if ($stm -> execute()) {
           <label>E-mail: </label>
           <input name='email_usuario' value='<?php print $email_usuario ?>'><br>
           <label>Senha: </label>          
-          <input type='password' name='senha_usuario'><br>
-          <label class="label_usuario">Foto de perfil: </label>
+          <input type='password' name='senha_usuario' placeholder="*** Alteração Opcional"><br>
+          <label class="label_usuario">Foto de perfil:</label>
           <input type="file" name="foto_perfil" />
           <button type='button' onclick="window.open('perfil.php', '_self')">Cancelar</button> 
           <button type='submit'>Atualizar</button>

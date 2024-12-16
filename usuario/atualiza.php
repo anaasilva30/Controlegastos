@@ -44,18 +44,29 @@
 }
 
 
+if (!empty($senha_usario)){
 	$query = "UPDATE cadastro_usuario SET  nome_usuario=?, telefone_usuario=?, email_usuario=?, senha_usuario=?, foto_perfil=? 
-                WHERE cpf_usuario=?";			
+	WHERE cpf_usuario=?";			
 	$stm = $db->prepare($query);
-	
+
 	$stm->bindParam(1, $nome_usario);
 	$stm->bindParam(2, $telefone_usario);
 	$stm->bindParam(3, $email_usario);
 	$stm->bindParam(4, $senha_usario);
 	$stm->bindParam(5, $foto_perfil);
-    $stm->bindParam(6, $cpf_usuario);
+	$stm->bindParam(6, $cpf_usuario);
+}
+else {
+	$query = "UPDATE cadastro_usuario SET  nome_usuario=?, telefone_usuario=?, email_usuario=?, foto_perfil=? 
+	WHERE cpf_usuario=?";			
+	$stm = $db->prepare($query);
 
-
+	$stm->bindParam(1, $nome_usario);
+	$stm->bindParam(2, $telefone_usario);
+	$stm->bindParam(3, $email_usario);
+	$stm->bindParam(4, $foto_perfil);
+	$stm->bindParam(5, $cpf_usuario);
+}
 	
 	$url = "";	
 	if($stm->execute()) {
