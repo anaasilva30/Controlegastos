@@ -1,7 +1,7 @@
 <?php
 // Inicia a sessao.
 session_start();
-
+$cpf = $_SESSION['cpf_usuario'];
 ?>
 
 <!DOCTYPE html>
@@ -115,10 +115,11 @@ session_start();
                     FROM 
                         entrada_usuario
                     WHERE 
-                        data_entrada BETWEEN ? AND ?";
+                        data_entrada BETWEEN ? AND ? AND cpf_usuario=?";
           $stm = $db -> prepare($query);
           $stm->bindParam(1, $dataInicial);
           $stm->bindParam(2, $dataFinal);
+          $stm->bindParam(3, $cpf);
           $stm -> execute();
         
           if ($row = $stm->fetch()) {           
@@ -181,7 +182,7 @@ session_start();
                 FROM 
                     entrada_usuario
                 WHERE 
-                    data_entrada BETWEEN ? AND ?
+                    data_entrada BETWEEN ? AND ? AND cpf_usuario=?
                 GROUP BY 
                     setor_entrada
                 ORDER BY 
@@ -190,6 +191,7 @@ session_start();
 			$stm = $db -> prepare($query);
 			$stm->bindParam(1, $data1);
 			$stm->bindParam(2, $data2);
+      $stm->bindParam(3, $cpf);
 			
 			if ($stm -> execute()) {
 				$result = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -304,7 +306,7 @@ session_start();
               FROM 
                   entrada_usuario
               WHERE 
-                  data_entrada BETWEEN ? AND ?
+                  data_entrada BETWEEN ? AND ? AND cpf_usuario=?
               GROUP BY 
                   tipo_entrada
               ORDER BY 
@@ -313,6 +315,7 @@ session_start();
     $stm = $db -> prepare($query);
     $stm->bindParam(1, $data1);
     $stm->bindParam(2, $data2);
+    $stm->bindParam(3, $cpf);
     
     if ($stm -> execute()) {
       $result = $stm->fetchAll(PDO::FETCH_ASSOC);
